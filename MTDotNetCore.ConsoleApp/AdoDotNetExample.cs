@@ -84,6 +84,34 @@ namespace MTDotNetCore.ConsoleApp
 
         }
 
+        public void Update(int BlogId, string blogTitle, string blogAuthor, string blogContent)
+        {
+            SqlConnection connection = new SqlConnection(_sqlConnectionStringBuilder.ConnectionString);
+            connection.Open();
+            Console.WriteLine("Connection Open.");
+
+            string query = @"UPDATE [dbo].[Tbl_Blog]
+                            SET [BlogTitle] = @BlogTitle
+                            ,[BlogAuthor] = @BlogAuthor
+                            ,[BlogContent] = @BlogContent
+                            WHERE [BlogId] = @BlogId";
+
+            SqlCommand cmd = new SqlCommand(query, connection);
+            cmd.Parameters.AddWithValue("@BlogId", BlogId);
+            cmd.Parameters.AddWithValue("@BlogTitle", blogTitle);
+            cmd.Parameters.AddWithValue("@BlogAuthor", blogAuthor);
+            cmd.Parameters.AddWithValue("@BlogContent", blogContent);
+
+            int result = cmd.ExecuteNonQuery();
+
+            string message = result > 0 ? "Update successful." : "Update failed.";
+            Console.WriteLine(message);
+
+            connection.Close();
+            Console.WriteLine("Connection Close.");
+
+        }
+
 
     }
 }
