@@ -112,6 +112,27 @@ namespace MTDotNetCore.ConsoleApp
 
         }
 
+        public void Delete(int BlogId)
+        {
+            SqlConnection connection = new SqlConnection(_sqlConnectionStringBuilder.ConnectionString);
+            connection.Open();
+            Console.WriteLine("Connection Open.");
+
+            string query = @"DELETE FROM [dbo].[Tbl_Blog] WHERE BlogId = @BlogId"; 
+
+            SqlCommand cmd = new SqlCommand(query, connection);
+            cmd.Parameters.AddWithValue("@BlogId", BlogId);
+
+            int result = cmd.ExecuteNonQuery();
+
+            string message = result > 0 ? "Delete successful." : "Delete failed.";
+            Console.WriteLine(message);
+
+            connection.Close();
+            Console.WriteLine("Connection Close.");
+
+        }
+
 
     }
 }
