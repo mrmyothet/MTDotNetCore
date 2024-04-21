@@ -12,6 +12,8 @@ adoDotNetExample.Create("title", "author", "content");
 //adoDotNetExample.Update(12, "blog title", "blog author", "blog content");
 adoDotNetExample.Delete(12);
 
+adoDotNetExample.Edit(1002);
+
 adoDotNetExample.Read();
 
 Console.ReadLine();

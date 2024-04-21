@@ -54,6 +54,40 @@ namespace MTDotNetCore.ConsoleApp
 
         }
 
+        public void Edit(int id)
+        {
+            SqlConnection connection = new SqlConnection(_sqlConnectionStringBuilder.ConnectionString);
+            connection.Open();
+            Console.WriteLine("Connection Open.");
+
+            string query = "select * from tbl_blog where BlogId = @BlogId";
+            
+            SqlCommand cmd = new SqlCommand(query, connection);
+            cmd.Parameters.AddWithValue("@BlogId", id);
+
+            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            sqlDataAdapter.Fill(dt);
+
+            connection.Close();
+            Console.WriteLine("Connection Close.");
+
+            if (dt.Rows.Count == 0)
+            {
+                Console.WriteLine("No data found.");
+                return; 
+            }
+
+            DataRow dr = dt.Rows[0];
+
+            Console.WriteLine("Blog Id => " + dr["BlogId"]);
+            Console.WriteLine("Blog Id => " + dr["BlogTitle"]);
+            Console.WriteLine("Blog Id => " + dr["BlogAuthor"]);
+            Console.WriteLine("Blog Id => " + dr["BlogContent"]);
+            Console.WriteLine("--------------------------------");
+
+        }
+
         public void Create(string title, string author, string content)
         {
             SqlConnection connection = new SqlConnection(_sqlConnectionStringBuilder.ConnectionString);
