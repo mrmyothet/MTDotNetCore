@@ -18,7 +18,9 @@ namespace MTDotNetCore.ConsoleApp
             //Edit(1);
             //Edit(12);
 
-            Create("title", "author", "content");
+            //Create("title", "author", "content");
+
+            Update(11, "updated title", "updated author", "updated content");
 
         }
 
@@ -80,6 +82,31 @@ namespace MTDotNetCore.ConsoleApp
             int result = db.Execute(query, item);
 
             string message = result > 0 ? "Saving successful." : "Saving failed.";
+            Console.WriteLine(message);
+
+        }
+
+        private void Update(int id, string title, string author, string content)
+        {
+            var item = new BlogDto
+            {
+                BlogId = id,
+                BlogTitle = title,
+                BlogAuthor = author,
+                BlogContent = content,
+            };
+
+            string query = @"UPDATE [dbo].[Tbl_Blog]
+                            SET [BlogTitle] = @BlogTitle
+                            ,[BlogAuthor] = @BlogAuthor
+                            ,[BlogContent] = @BlogContent
+                            WHERE [BlogId] = @BlogId";
+
+            using IDbConnection db = new SqlConnection(ConnectionStrings.sqlConnectionStringBuilder.ConnectionString);
+
+            int result = db.Execute(query, item);
+
+            string message = result > 0 ? "Update successful." : "Update failed.";
             Console.WriteLine(message);
 
         }
