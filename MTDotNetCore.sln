@@ -13,6 +13,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{008548F7-5C81-41B7-97FA-3BF0B67CAC39}"
 	ProjectSection(SolutionItems) = preProject
 		Database\DotNetTrainingBatch4.sql = Database\DotNetTrainingBatch4.sql
+		Database\tblBlog.sql = Database\tblBlog.sql
 	EndProjectSection
 EndProject
 Global
