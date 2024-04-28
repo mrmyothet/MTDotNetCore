@@ -14,6 +14,9 @@ namespace MTDotNetCore.ConsoleApp
         public void Run()
         {
             Read();
+            Edit(1);
+            Edit(12);
+
         }
 
         private void Read() 
@@ -30,8 +33,25 @@ namespace MTDotNetCore.ConsoleApp
                 Console.WriteLine(item.BlogContent);
                 Console.WriteLine("------------------------------");
             }
+        }
 
+        private void Edit(int id)
+        {
+            using IDbConnection db = new SqlConnection(ConnectionStrings.sqlConnectionStringBuilder.ConnectionString);
+            
+            var item = db.Query<BlogDto>("select * from tbl_blog where blogid = @BlogId", new BlogDto { BlogId = id }).FirstOrDefault();
 
+            if (item is null)
+            {
+                Console.WriteLine("No data found");
+                return;
+            }
+
+            Console.WriteLine(item.BlogId);
+            Console.WriteLine(item.BlogTitle);
+            Console.WriteLine(item.BlogAuthor);
+            Console.WriteLine(item.BlogContent);
+            Console.WriteLine("------------------------------");
         }
     }
 }
