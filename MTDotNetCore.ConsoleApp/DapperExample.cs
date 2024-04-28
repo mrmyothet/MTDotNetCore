@@ -20,7 +20,9 @@ namespace MTDotNetCore.ConsoleApp
 
             //Create("title", "author", "content");
 
-            Update(11, "updated title", "updated author", "updated content");
+            //Update(11, "updated title", "updated author", "updated content");
+
+            Delete(11);
 
         }
 
@@ -109,6 +111,19 @@ namespace MTDotNetCore.ConsoleApp
             string message = result > 0 ? "Update successful." : "Update failed.";
             Console.WriteLine(message);
 
+        }
+
+        private void Delete(int id)
+        {
+            var item = new BlogDto { BlogId  = id};
+
+            string query = "DELETE FROM [dbo].[Tbl_Blog] WHERE BlogId = @BlogId";
+
+            using IDbConnection db = new SqlConnection(ConnectionStrings.sqlConnectionStringBuilder.ConnectionString);
+            int result = db.Execute(query, item);
+
+            string message = result > 0 ? "Delete successful" : "Delete Failed";
+            Console.WriteLine(message);
         }
 
     }
