@@ -20,8 +20,16 @@ namespace MTDotNetCore.ConsoleApp
         {
             using IDbConnection db = new SqlConnection(ConnectionStrings.sqlConnectionStringBuilder.ConnectionString);
 
-            List<dynamic> lst =  db.Query("select * from tbl_blog").ToList();
-            Console.WriteLine(lst.Count);
+            List<BlogDto> lst =  db.Query<BlogDto>("select * from tbl_blog").ToList();
+            
+            foreach (BlogDto item in lst)
+            {
+                Console.WriteLine(item.BlogId);
+                Console.WriteLine(item.BlogTitle);
+                Console.WriteLine(item.BlogAuthor);
+                Console.WriteLine(item.BlogContent);
+                Console.WriteLine("------------------------------");
+            }
 
 
         }
