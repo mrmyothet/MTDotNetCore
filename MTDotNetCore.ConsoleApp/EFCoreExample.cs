@@ -19,7 +19,11 @@ namespace MTDotNetCore.ConsoleApp
 
             //Create("new title","new author", "new content");
 
-            Update(2006, "updated title", "updated author", "updated content");
+            //Update(2006, "updated title", "updated author", "updated content");
+
+            Delete(1001);
+            Delete(2005);
+
         }
 
         private void Read()
@@ -92,6 +96,23 @@ namespace MTDotNetCore.ConsoleApp
             int result = db.SaveChanges();
 
             string message = result > 0 ? "Update Successful" : "Update Failed";
+            Console.WriteLine(message);
+        }
+
+        private void Delete(int id)
+        {
+            var item = db.Blogs.FirstOrDefault(x=> x.BlogId == id);
+
+            if (item is null) 
+            {
+                Console.WriteLine("No data found with the Id: " + id);
+                return;
+            }
+
+            db.Blogs.Remove(item);
+            int rowsAffected = db.SaveChanges();
+
+            string message = rowsAffected > 0 ? "Delete Successful" : "Delete Failed";
             Console.WriteLine(message);
         }
     }
