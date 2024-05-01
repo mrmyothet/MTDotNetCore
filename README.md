@@ -12,3 +12,5 @@ C# => Db
 Code First 
 Database First <=
 
+Scaffold-DbContext - to create a model based on the existing database. 
+Scaffold-DbContext "Server=MYOTHETPC\MSSQLSERVER2012;Database=DotNetTrainingBatch4;User ID=MYOTHETPC\Administrator;Password=admin123!;TrustServerCertificate=True;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -Context ScaffoldDbContext
