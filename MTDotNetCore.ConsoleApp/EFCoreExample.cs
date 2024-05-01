@@ -8,14 +8,17 @@ namespace MTDotNetCore.ConsoleApp
 {
     internal class EFCoreExample
     {
+
+        private readonly AppDbContext db = new AppDbContext();
         public void Run()
         {
             Read();
+            Edit(10);
+            Edit(11);
         }
 
         private void Read()
         {
-            AppDbContext db = new AppDbContext();
             var lstBlogs = db.Blogs.ToList();
 
             // ERROR 
@@ -35,6 +38,21 @@ namespace MTDotNetCore.ConsoleApp
                 Console.WriteLine(item.BlogContent);
                 Console.WriteLine("------------------------------");
             }
+        }
+
+        private void Edit(int id)
+        {
+            var item = db.Blogs.FirstOrDefault(x=> x.BlogId == id);
+
+            if (item is null) {
+                Console.WriteLine("No data found.");
+                return;
+            }
+
+            Console.WriteLine(item.BlogId);
+            Console.WriteLine(item.BlogTitle);
+            Console.WriteLine(item.BlogAuthor);
+            Console.WriteLine(item.BlogContent);
         }
     }
 }
