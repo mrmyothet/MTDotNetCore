@@ -12,9 +12,11 @@ namespace MTDotNetCore.ConsoleApp
         private readonly AppDbContext db = new AppDbContext();
         public void Run()
         {
-            Read();
-            Edit(10);
-            Edit(11);
+            //Read();
+            //Edit(10);
+            //Edit(11);
+
+            Create("new title","new author", "new content");
         }
 
         private void Read()
@@ -53,6 +55,21 @@ namespace MTDotNetCore.ConsoleApp
             Console.WriteLine(item.BlogTitle);
             Console.WriteLine(item.BlogAuthor);
             Console.WriteLine(item.BlogContent);
+        }
+
+        private void Create(string title, string author, string content) {
+            var item = new BlogDto
+            {
+                BlogTitle = title,
+                BlogAuthor = author,
+                BlogContent = content
+            };
+
+            db.Blogs.Add(item); // same as writing insert query 
+            int result = db.SaveChanges();  // same as Execute query
+
+            string message = result > 0 ? "Saving Successful" : "Saving Failed";
+            Console.WriteLine(message);
         }
     }
 }
