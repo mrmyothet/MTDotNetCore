@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,7 +17,9 @@ namespace MTDotNetCore.ConsoleApp
             //Edit(10);
             //Edit(11);
 
-            Create("new title","new author", "new content");
+            //Create("new title","new author", "new content");
+
+            Update(2006, "updated title", "updated author", "updated content");
         }
 
         private void Read()
@@ -69,6 +72,26 @@ namespace MTDotNetCore.ConsoleApp
             int result = db.SaveChanges();  // same as Execute query
 
             string message = result > 0 ? "Saving Successful" : "Saving Failed";
+            Console.WriteLine(message);
+        }
+
+        private void Update(int id, string title, string author, string content) 
+        {
+            var item = db.Blogs.FirstOrDefault(x=> x.BlogId == id);
+            //item = db.Blogs.AsNoTracking().FirstOrDefault(x=> x.BlogId == id);
+
+            if (item is null) {
+                Console.WriteLine("No data found with the Id:" + id);
+                return;
+            }
+
+            item.BlogTitle = title;
+            item.BlogAuthor = author;
+            item.BlogContent = content;
+
+            int result = db.SaveChanges();
+
+            string message = result > 0 ? "Update Successful" : "Update Failed";
             Console.WriteLine(message);
         }
     }
