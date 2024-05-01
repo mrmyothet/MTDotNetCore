@@ -14,7 +14,8 @@ namespace MTDotNetCore.ConsoleApp
             DataSource = "MYOTHETPC\\MSSQLSERVER2012",
             InitialCatalog = "DotNetTrainingBatch4",
             UserID = "sa", 
-            Password = "admin123!"
+            Password = "admin123!", 
+            TrustServerCertificate = true
         };
 
     }

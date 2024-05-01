@@ -12,7 +12,10 @@ using System.Data.SqlClient;
 //adoDotNetExample.Read();
 
 
-DapperExample dapperExample = new DapperExample();
-dapperExample.Run();
+//DapperExample dapperExample = new DapperExample();
+//dapperExample.Run();
+
+EFCoreExample eFCoreExample = new EFCoreExample();
+eFCoreExample.Run();
 
 Console.ReadLine();

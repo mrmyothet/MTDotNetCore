@@ -9,6 +9,12 @@ namespace MTDotNetCore.ConsoleApp
 {
     internal class AppDbContext : DbContext
     {
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            //base.OnConfiguring(optionsBuilder);
+
+            optionsBuilder.UseSqlServer(ConnectionStrings.sqlConnectionStringBuilder.ConnectionString);
+        }
         public DbSet<BlogDto> Blogs { get; set; }
     }
 }
