@@ -14,3 +14,24 @@ Database First <=
 
 Scaffold-DbContext - to create a model based on the existing database. 
 Scaffold-DbContext "Server=MYOTHETPC\MSSQLSERVER2012;Database=DotNetTrainingBatch4;User ID=MYOTHETPC\Administrator;Password=admin123!;TrustServerCertificate=True;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -Context ScaffoldDbContext
+
+HTTP Methods
+
+get
+post
+put
+patch
+delete
+
+get		  => read
+post	  => create
+put/patch => update
+delete	  => delete
+
+HTTP Status Codes
+
+100 - 199 => Information responses
+200 - 299 => Successful responses
+300 - 399 => Redirection messages
+400 - 499 => Client error responses
+500 - 599 => Server error responses 
