@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MTDotNetCore.ConsoleApp;
+namespace MTDotNetCore.ConsoleApp.Dtos;
 
 
 [Table("Tbl_Blog")]

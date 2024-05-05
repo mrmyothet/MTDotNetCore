@@ -1,11 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MTDotNetCore.ConsoleApp.Dtos;
+using MTDotNetCore.ConsoleApp.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MTDotNetCore.ConsoleApp
+namespace MTDotNetCore.ConsoleApp.EFCoreExamples
 {
     internal class AppDbContext : DbContext
     {

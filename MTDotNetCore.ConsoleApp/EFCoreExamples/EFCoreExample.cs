@@ -1,11 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MTDotNetCore.ConsoleApp.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MTDotNetCore.ConsoleApp
+namespace MTDotNetCore.ConsoleApp.EFCoreExamples
 {
     internal class EFCoreExample
     {
@@ -51,9 +52,10 @@ namespace MTDotNetCore.ConsoleApp
 
         private void Edit(int id)
         {
-            var item = db.Blogs.FirstOrDefault(x=> x.BlogId == id);
+            var item = db.Blogs.FirstOrDefault(x => x.BlogId == id);
 
-            if (item is null) {
+            if (item is null)
+            {
                 Console.WriteLine("No data found.");
                 return;
             }
@@ -64,7 +66,8 @@ namespace MTDotNetCore.ConsoleApp
             Console.WriteLine(item.BlogContent);
         }
 
-        private void Create(string title, string author, string content) {
+        private void Create(string title, string author, string content)
+        {
             var item = new BlogDto
             {
                 BlogTitle = title,
@@ -79,12 +82,13 @@ namespace MTDotNetCore.ConsoleApp
             Console.WriteLine(message);
         }
 
-        private void Update(int id, string title, string author, string content) 
+        private void Update(int id, string title, string author, string content)
         {
-            var item = db.Blogs.FirstOrDefault(x=> x.BlogId == id);
+            var item = db.Blogs.FirstOrDefault(x => x.BlogId == id);
             //item = db.Blogs.AsNoTracking().FirstOrDefault(x=> x.BlogId == id);
 
-            if (item is null) {
+            if (item is null)
+            {
                 Console.WriteLine("No data found with the Id:" + id);
                 return;
             }
@@ -101,9 +105,9 @@ namespace MTDotNetCore.ConsoleApp
 
         private void Delete(int id)
         {
-            var item = db.Blogs.FirstOrDefault(x=> x.BlogId == id);
+            var item = db.Blogs.FirstOrDefault(x => x.BlogId == id);
 
-            if (item is null) 
+            if (item is null)
             {
                 Console.WriteLine("No data found with the Id: " + id);
                 return;

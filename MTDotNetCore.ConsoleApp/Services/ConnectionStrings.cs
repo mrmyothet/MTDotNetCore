@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MTDotNetCore.ConsoleApp
+namespace MTDotNetCore.ConsoleApp.Services
 {
     internal static class ConnectionStrings
     {
@@ -13,8 +13,8 @@ namespace MTDotNetCore.ConsoleApp
         {
             DataSource = "MYOTHETPC\\MSSQLSERVER2012",
             InitialCatalog = "DotNetTrainingBatch4",
-            UserID = "sa", 
-            Password = "admin123!", 
+            UserID = "sa",
+            Password = "admin123!",
             TrustServerCertificate = true
         };
 

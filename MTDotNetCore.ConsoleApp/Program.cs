@@ -1,4 +1,5 @@
 ﻿using MTDotNetCore.ConsoleApp;
+using MTDotNetCore.ConsoleApp.AdoDotNetExamples;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -15,7 +16,10 @@ using System.Data.SqlClient;
 //DapperExample dapperExample = new DapperExample();
 //dapperExample.Run();
 
-EFCoreExample eFCoreExample = new EFCoreExample();
-eFCoreExample.Run();
+//EFCoreExample eFCoreExample = new EFCoreExample();
+//eFCoreExample.Run();
+
+AdoDotNetExample adoDotNetExample = new AdoDotNetExample();
+adoDotNetExample.Create("new Title", "new Author", "new Content");
 
 Console.ReadLine();

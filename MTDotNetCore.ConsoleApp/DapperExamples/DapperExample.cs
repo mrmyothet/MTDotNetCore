@@ -1,4 +1,6 @@
 ﻿using Dapper;
+using MTDotNetCore.ConsoleApp.Dtos;
+using MTDotNetCore.ConsoleApp.Services;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -8,7 +10,7 @@ using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MTDotNetCore.ConsoleApp
+namespace MTDotNetCore.ConsoleApp.DapperExamples
 {
     internal class DapperExample
     {
@@ -26,12 +28,12 @@ namespace MTDotNetCore.ConsoleApp
 
         }
 
-        private void Read() 
+        private void Read()
         {
             using IDbConnection db = new SqlConnection(ConnectionStrings.sqlConnectionStringBuilder.ConnectionString);
 
-            List<BlogDto> lst =  db.Query<BlogDto>("select * from tbl_blog").ToList();
-            
+            List<BlogDto> lst = db.Query<BlogDto>("select * from tbl_blog").ToList();
+
             foreach (BlogDto item in lst)
             {
                 Console.WriteLine(item.BlogId);
@@ -63,9 +65,9 @@ namespace MTDotNetCore.ConsoleApp
 
         private void Create(string title, string author, string content)
         {
-            var item = new BlogDto 
-            { 
-                BlogTitle = title, 
+            var item = new BlogDto
+            {
+                BlogTitle = title,
                 BlogAuthor = author,
                 BlogContent = content,
             };
@@ -115,7 +117,7 @@ namespace MTDotNetCore.ConsoleApp
 
         private void Delete(int id)
         {
-            var item = new BlogDto { BlogId  = id};
+            var item = new BlogDto { BlogId = id };
 
             string query = "DELETE FROM [dbo].[Tbl_Blog] WHERE BlogId = @BlogId";
 

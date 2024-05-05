@@ -6,22 +6,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MTDotNetCore.ConsoleApp
+namespace MTDotNetCore.ConsoleApp.AdoDotNetExamples
 {
     internal class AdoDotNetExample
     {
 
-        private readonly SqlConnectionStringBuilder _sqlConnectionStringBuilder = new SqlConnectionStringBuilder() 
+        private readonly SqlConnectionStringBuilder _sqlConnectionStringBuilder = new SqlConnectionStringBuilder()
         {
-            DataSource = "SOLIDCAD-SERVER\\SQLEXPRESS2012", // SQL Server Name 
+            DataSource = "MYOTHETPC\\MSSQLSERVER2012", // SQL Server Name 
             InitialCatalog = "DotNetTrainingBatch4",  // database name 
-            UserID = "sa", 
+            UserID = "sa",
             Password = "admin123!"
         };
 
-        public void Read() 
+        public void Read()
         {
-            
+
             SqlConnection connection = new SqlConnection(_sqlConnectionStringBuilder.ConnectionString);
             // SqlConnection connection = new SqlConnection("Data Source=SOLIDCAD-SERVER\\SQLEXPRESS2012;Initial Catalog=DotNetTrainingBatch4;User ID=sa;Password=admin123!");
             connection.Open();
@@ -61,7 +61,7 @@ namespace MTDotNetCore.ConsoleApp
             Console.WriteLine("Connection Open.");
 
             string query = "select * from tbl_blog where BlogId = @BlogId";
-            
+
             SqlCommand cmd = new SqlCommand(query, connection);
             cmd.Parameters.AddWithValue("@BlogId", id);
 
@@ -75,7 +75,7 @@ namespace MTDotNetCore.ConsoleApp
             if (dt.Rows.Count == 0)
             {
                 Console.WriteLine("No data found.");
-                return; 
+                return;
             }
 
             DataRow dr = dt.Rows[0];
@@ -152,7 +152,7 @@ namespace MTDotNetCore.ConsoleApp
             connection.Open();
             Console.WriteLine("Connection Open.");
 
-            string query = @"DELETE FROM [dbo].[Tbl_Blog] WHERE BlogId = @BlogId"; 
+            string query = @"DELETE FROM [dbo].[Tbl_Blog] WHERE BlogId = @BlogId";
 
             SqlCommand cmd = new SqlCommand(query, connection);
             cmd.Parameters.AddWithValue("@BlogId", BlogId);
