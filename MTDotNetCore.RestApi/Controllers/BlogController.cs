@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MTDotNetCore.RestApi.Db;
+using MTDotNetCore.RestApi.Models;
+using System.Reflection.Metadata;
 
 namespace MTDotNetCore.RestApi.Controllers
 {
@@ -39,15 +41,33 @@ namespace MTDotNetCore.RestApi.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create()
+        public IActionResult Create(BlogModel blog)
         {
-            return Ok();
+            _context.Blogs.Add(blog);
+            var result = _context.SaveChanges();
+
+            string message = result > 0 ? "Saving Successful" : "Saving Failed";
+            return Ok(message);
         }
 
-        [HttpPut]
-        public IActionResult Update()
+        [HttpPut("{id}")]
+        public IActionResult Update(int id, BlogModel blog)
         {
-            return Ok();
+            var item = _context.Blogs.FirstOrDefault(x=> x.BlogId == id);
+            if (item is null)
+            {
+                return NotFound("No data found for the Id: " + id);
+            }
+
+            item.BlogTitle = blog.BlogTitle;
+            item.BlogAuthor = blog.BlogAuthor;
+            item.BlogContent = blog.BlogContent;
+
+            var result = _context.SaveChanges();
+
+            string message = result > 0 ? "Updating Successful" : "Updating Failed";
+
+            return Ok(message);
         }
 
         [HttpPatch]
