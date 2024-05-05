@@ -35,3 +35,11 @@ HTTP Status Codes
 - 300 - 399 => Redirection messages
 - 400 - 499 => Client error responses
 - 500 - 599 => Server error responses 
+
+Application Environment (Stages)
+================================
+
+- DEV - Development - [ Software Developer ]
+- SIT - System Integration Test - [ Software Developer & QA Engineer ]
+- UAT - User Acceptance Test - [ Client ]
+- PROD - Production - [ Public user ]
