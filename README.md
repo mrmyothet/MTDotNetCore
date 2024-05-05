@@ -10,6 +10,7 @@ C# => Db
 - 2024-04-10--Ado.Net
 - 2024-04-22--Dapper
 - 2024-04-23--EFCore 
+- 2024-04-24--ASP.NET Core Web API EFCore CRUD 
 
 ---
 
