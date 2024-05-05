@@ -70,16 +70,46 @@ namespace MTDotNetCore.RestApi.Controllers
             return Ok(message);
         }
 
-        [HttpPatch]
-        public IActionResult Patch()
+        [HttpPatch("{id}")]
+        public IActionResult Patch(int id, BlogModel blog)
         {
-            return Ok();
+            var item = _context.Blogs.FirstOrDefault(x => x.BlogId == id);
+            if (item is null)
+            {
+                return NotFound("No data found for the Id: " + id);
+            }
+
+            if(!string.IsNullOrEmpty(blog.BlogTitle))
+                item.BlogTitle = blog.BlogTitle;
+
+            if (!string.IsNullOrEmpty(blog.BlogAuthor)) 
+                item.BlogAuthor = blog.BlogAuthor;
+
+            if(!string.IsNullOrEmpty(blog.BlogContent))
+                item.BlogContent = blog.BlogContent;
+            
+            var result = _context.SaveChanges();
+
+            string message = result > 0 ? "Updating Successful" : "Updating Failed";
+
+            return Ok(message);
         }
 
-        [HttpDelete]
-        public IActionResult Delete()
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
         {
-            return Ok();
+            var item = _context.Blogs.FirstOrDefault(x=> x.BlogId == id);
+            if (item is null)
+            {
+                return NotFound("No data found with the Id: " + id);
+            }
+
+            _context.Blogs.Remove(item);
+            var result = _context.SaveChanges();
+
+            string message = result > 0 ? "Delete Successful" : "Delete Failed";
+
+            return Ok(message);
         }
     }
 }
