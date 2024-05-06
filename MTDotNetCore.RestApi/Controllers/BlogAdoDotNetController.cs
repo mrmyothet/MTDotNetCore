@@ -19,7 +19,7 @@ namespace MTDotNetCore.RestApi.Controllers
             connection.Open();
 
             // Ado.Net Read
-            
+
             SqlCommand cmd = new SqlCommand(query, connection);
             SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
@@ -43,8 +43,8 @@ namespace MTDotNetCore.RestApi.Controllers
             List<BlogModel> lst = dt.AsEnumerable().Select(dr => new BlogModel
             {
                 BlogId = Convert.ToInt32(dr["BlogId"]),
-                BlogTitle = Convert.ToString(dr["BlogTitle"]), 
-                BlogAuthor = Convert.ToString(dr["BlogAuthor"]), 
+                BlogTitle = Convert.ToString(dr["BlogTitle"]),
+                BlogAuthor = Convert.ToString(dr["BlogAuthor"]),
                 BlogContent = Convert.ToString(dr["BlogContent"])
 
             }).ToList();
@@ -71,7 +71,7 @@ namespace MTDotNetCore.RestApi.Controllers
 
             if (dt.Rows.Count == 0)
             {
-                
+
                 return NotFound("No data found for the Id: " + id);
             }
 
@@ -150,6 +150,58 @@ namespace MTDotNetCore.RestApi.Controllers
             connection.Close();
 
             string message = result > 0 ? "Update successful." : "Update failed.";
+            return Ok(message);
+        }
+
+        [HttpPatch("{id}")]
+        public IActionResult PatchBlog(int id, BlogModel blog)
+        {
+            BlogModel item = FindById(id);
+
+            if (item is null)
+            {
+                return NotFound("Data not found with the Id: " + id);
+            }
+
+            SqlConnection connection = new SqlConnection(ConnectionStrings.sqlConnectionStringBuilder.ConnectionString);
+            connection.Open();
+
+            string conditions = string.Empty;
+
+            if (!string.IsNullOrEmpty(blog.BlogTitle))
+                conditions += "[BlogTitle] = @BlogTitle, ";
+
+            if (!string.IsNullOrEmpty(blog.BlogAuthor))
+                conditions += "[BlogAuthor] = @BlogAuthor, ";
+
+            if (!string.IsNullOrEmpty(blog.BlogContent))
+                conditions += "[BlogContent] = @BlogContent, ";
+
+            if (conditions.Length == 0)
+                return NotFound("No data to update");
+
+            conditions = conditions.Substring(0, conditions.Length - 2);
+
+            string query = $@"UPDATE [dbo].[Tbl_Blog]
+                            SET {conditions}
+                            WHERE [BlogId] = @BlogId";
+
+            SqlCommand cmd = new SqlCommand(query, connection);
+
+            cmd.Parameters.AddWithValue("@BlogId", id);
+            if(blog.BlogTitle is not null)
+                cmd.Parameters.AddWithValue("@BlogTitle", blog.BlogTitle);
+
+            if(blog.BlogAuthor is not null)
+                cmd.Parameters.AddWithValue("@BlogAuthor", blog.BlogAuthor);
+
+            if(blog.BlogContent is not null)
+                cmd.Parameters.AddWithValue("@BlogContent", blog.BlogContent);
+
+            int result = cmd.ExecuteNonQuery();
+            connection.Close();
+
+            string message = result > 0 ? "Patch Successful." : "Patch Failed.";
             return Ok(message);
         }
 
