@@ -205,6 +205,30 @@ namespace MTDotNetCore.RestApi.Controllers
             return Ok(message);
         }
 
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteBlog(int id)
+        {
+            var item = FindById(id);
+
+            if (item is null)
+            {
+                return NotFound("No data found for the Id: " + id);
+            }
+
+            string query = @"DELETE FROM [dbo].[Tbl_Blog] WHERE BlogId = @BlogId";
+
+            SqlConnection connection = new SqlConnection(ConnectionStrings.sqlConnectionStringBuilder.ConnectionString);
+            connection.Open();
+
+            SqlCommand cmd = new SqlCommand(query, connection);
+            cmd.Parameters.AddWithValue("@BlogId", id);
+
+            int result = cmd.ExecuteNonQuery();
+
+            string message = result > 0 ? "Delete Successful." : "Delete Failed.";
+            return Ok(message);
+        }
         private BlogModel FindById(int Id)
         {
             string query = "select * from tbl_blog where BlogId = @BlogId";
