@@ -119,5 +119,73 @@ namespace MTDotNetCore.RestApi.Controllers
 
             return Ok(message);
         }
+
+        [HttpPut("{id}")]
+        public IActionResult UpdateBlog(int id, BlogModel blog)
+        {
+            BlogModel item = FindById(id);
+
+            if (item is null)
+            {
+                return NotFound("Data not found with the Id: " + id);
+            }
+
+            string query = @"UPDATE [dbo].[Tbl_Blog]
+                            SET [BlogTitle] = @BlogTitle
+                            ,[BlogAuthor] = @BlogAuthor
+                            ,[BlogContent] = @BlogContent
+                            WHERE [BlogId] = @BlogId";
+
+            SqlConnection connection = new SqlConnection(ConnectionStrings.sqlConnectionStringBuilder.ConnectionString);
+            connection.Open();
+
+            SqlCommand cmd = new SqlCommand(query, connection);
+
+            cmd.Parameters.AddWithValue("@BlogId", id);
+            cmd.Parameters.AddWithValue("@BlogTitle", blog.BlogTitle);
+            cmd.Parameters.AddWithValue("@BlogAuthor", blog.BlogAuthor);
+            cmd.Parameters.AddWithValue("@BlogContent", blog.BlogContent);
+
+            int result = cmd.ExecuteNonQuery();
+            connection.Close();
+
+            string message = result > 0 ? "Update successful." : "Update failed.";
+            return Ok(message);
+        }
+
+        private BlogModel FindById(int Id)
+        {
+            string query = "select * from tbl_blog where BlogId = @BlogId";
+
+            SqlConnection connection = new SqlConnection(ConnectionStrings.sqlConnectionStringBuilder.ConnectionString);
+            connection.Open();
+
+            SqlCommand cmd = new SqlCommand(query, connection);
+            cmd.Parameters.AddWithValue("@BlogId", Id);
+
+            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            sqlDataAdapter.Fill(dt);
+
+            connection.Close();
+
+            if (dt.Rows.Count == 0)
+            {
+
+                return null;
+            }
+
+            DataRow dr = dt.Rows[0];
+
+            BlogModel blog = new BlogModel
+            {
+                BlogId = Convert.ToInt32(dr["BlogId"]),
+                BlogTitle = Convert.ToString(dr["BlogTitle"]),
+                BlogAuthor = Convert.ToString(dr["BlogAuthor"]),
+                BlogContent = Convert.ToString(dr["BlogContent"])
+            };
+
+            return blog;
+        }
     }
 }
