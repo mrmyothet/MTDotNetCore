@@ -49,18 +49,30 @@ namespace MTDotNetCore.Shared
 
             return lst;
         }
-    }
 
+        public int Execute(string query, params AdoDotNetParameter[]? parameters)
+        {
+            SqlConnection connection = new SqlConnection(_connectionString);
+            connection.Open();
+
+            SqlCommand cmd = new SqlCommand(query, connection);
+
+            if (parameters is not null && parameters.Length > 0)
+            {
+                cmd.Parameters.AddRange(parameters.Select(item => new SqlParameter(item.Name, item.Value)).ToArray());
+            }
+
+            int result = cmd.ExecuteNonQuery();
+            connection.Close();
+
+            return result;
+        }
+    }
     public class AdoDotNetParameter
     {
         public string Name { get; set; }
 
         public object Value { get; set; }
-
-        public AdoDotNetParameter()
-        {
-            
-        }
 
         public AdoDotNetParameter(string name, object value)
         {
@@ -69,3 +81,6 @@ namespace MTDotNetCore.Shared
         }
     }
 }
+
+
+

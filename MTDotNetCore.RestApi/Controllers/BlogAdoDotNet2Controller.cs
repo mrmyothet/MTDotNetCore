@@ -42,7 +42,27 @@ namespace MTDotNetCore.RestApi.Controllers
         [HttpPost]
         public IActionResult CreateBlog(BlogModel blog)
         {
-            return Ok();
+            string query = @"INSERT INTO [dbo].[Tbl_Blog]
+           ([BlogTitle]
+           ,[BlogAuthor]
+           ,[BlogContent])
+     VALUES
+           (@BlogTitle
+           ,@BlogAuthor
+           ,@BlogContent)";
+
+            int result = _adoDotNetService.Execute(query,
+                new AdoDotNetParameter("@BlogTitle", blog.BlogTitle),
+                new AdoDotNetParameter("@BlogAuthor", blog.BlogAuthor),
+                new AdoDotNetParameter("@BlogContent", blog.BlogContent)
+                );
+
+            string message = result > 0 ? "Saving successful." : "Saving failed.";
+
+            if (message == "Saving failed.")
+                return StatusCode(500, message);
+
+            return Ok(message);
         }
 
         [HttpPut("{id}")]
