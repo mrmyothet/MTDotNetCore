@@ -18,7 +18,7 @@ namespace MTDotNetCore.Shared
             _connectionString = connectionString;
         }
 
-        public List<T> Query<T>(string query, AdoDotNetParameter[]? parameters = null)
+        public List<T> Query<T>(string query, params AdoDotNetParameter[]? parameters)
         {
             SqlConnection connection = new SqlConnection(_connectionString);
             connection.Open();

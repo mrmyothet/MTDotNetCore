@@ -28,10 +28,8 @@ namespace MTDotNetCore.RestApi.Controllers
         {
             string query = "select * from tbl_blog where BlogId = @BlogId";
 
-
-            AdoDotNetParameter[] parameters = new AdoDotNetParameter[1];
-            parameters[0] = new AdoDotNetParameter("BlogId", id);
-            var lst = _adoDotNetService.Query<BlogModel>(query, parameters);
+            var lst = _adoDotNetService.Query<BlogModel>(query, 
+                new AdoDotNetParameter("BlogId", id));
 
             var item = lst.FirstOrDefault();
 
