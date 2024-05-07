@@ -26,7 +26,19 @@ namespace MTDotNetCore.RestApi.Controllers
         [HttpGet("{id}")]
         public IActionResult GetBlog(int id)
         {
-            return Ok();
+            string query = "select * from tbl_blog where BlogId = @BlogId";
+
+
+            AdoDotNetParameter[] parameters = new AdoDotNetParameter[1];
+            parameters[0] = new AdoDotNetParameter("BlogId", id);
+            var lst = _adoDotNetService.Query<BlogModel>(query, parameters);
+
+            var item = lst.FirstOrDefault();
+
+            if (item is null)
+                return NotFound("Data not found for the Id: " + id);
+
+            return Ok(lst);
         }
 
         [HttpPost]
