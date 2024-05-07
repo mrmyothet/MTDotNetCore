@@ -95,7 +95,52 @@ namespace MTDotNetCore.RestApi.Controllers
         [HttpPatch("{id}")]
         public IActionResult PatchBlog(int id, BlogModel blog)
         {
-            return Ok();
+            BlogModel item = FindById(id);
+
+            if (item is null)
+            {
+                return NotFound("Data not found with the Id: " + id);
+            }
+
+            // Arrange query 
+            string conditions = string.Empty;
+
+            if (!string.IsNullOrEmpty(blog.BlogTitle))
+                conditions += "[BlogTitle] = @BlogTitle, ";
+
+            if (!string.IsNullOrEmpty(blog.BlogAuthor))
+                conditions += "[BlogAuthor] = @BlogAuthor, ";
+
+            if (!string.IsNullOrEmpty(blog.BlogContent))
+                conditions += "[BlogContent] = @BlogContent, ";
+
+            if (conditions.Length == 0)
+                return NotFound("No data to update");
+
+            conditions = conditions.Substring(0, conditions.Length - 2);
+
+            string query = $@"UPDATE [dbo].[Tbl_Blog]
+                            SET {conditions}
+                            WHERE [BlogId] = @BlogId";
+
+            // Arrange Parameters 
+            List<AdoDotNetParameter> lstParameters = new List<AdoDotNetParameter>();
+            lstParameters.Add(new AdoDotNetParameter("@BlogId", id));
+
+            if (blog.BlogTitle is not null)
+                lstParameters.Add(new AdoDotNetParameter("@BlogTitle", blog.BlogTitle));
+
+            if (blog.BlogAuthor is not null)
+                lstParameters.Add(new AdoDotNetParameter("@BlogAuthor", blog.BlogAuthor));
+
+            if (blog.BlogContent is not null)
+                lstParameters.Add(new AdoDotNetParameter("@BlogContent", blog.BlogContent));
+
+            // Act
+            int result = _adoDotNetService.Execute(query, lstParameters.ToArray());
+
+            string message = result > 0 ? "Patch Successful." : "Patch Failed.";
+            return Ok(message);
         }
 
 
