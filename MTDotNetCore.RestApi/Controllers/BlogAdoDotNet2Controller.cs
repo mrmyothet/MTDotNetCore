@@ -68,7 +68,28 @@ namespace MTDotNetCore.RestApi.Controllers
         [HttpPut("{id}")]
         public IActionResult UpdateBlog(int id, BlogModel blog)
         {
-            return Ok();
+            BlogModel item = FindById(id);
+
+            if (item is null)
+            {
+                return NotFound("Data not found with the Id: " + id);
+            }
+
+            string query = @"UPDATE [dbo].[Tbl_Blog]
+                            SET [BlogTitle] = @BlogTitle
+                            ,[BlogAuthor] = @BlogAuthor
+                            ,[BlogContent] = @BlogContent
+                            WHERE [BlogId] = @BlogId";
+
+            int result = _adoDotNetService.Execute(query, 
+                new AdoDotNetParameter ("@BlogTitle", blog.BlogTitle),
+                new AdoDotNetParameter("@BlogAuthor", blog.BlogAuthor),
+                new AdoDotNetParameter("@BlogContent", blog.BlogContent),
+                new AdoDotNetParameter("@BlogId", id)
+                );
+
+            string message = result > 0 ? "Update successful." : "Update failed.";
+            return Ok(message);
         }
 
         [HttpPatch("{id}")]
@@ -85,8 +106,13 @@ namespace MTDotNetCore.RestApi.Controllers
         }
         private BlogModel FindById(int Id)
         {
-            BlogModel blog = new BlogModel();
-            return blog;
+            string query = "select * from tbl_blog where BlogId = @BlogId";
+            
+            var lst = _adoDotNetService.Query<BlogModel>(query,
+                new AdoDotNetParameter("BlogId", Id));
+
+            var item = lst.FirstOrDefault();
+            return item;
         }
     }
 }
