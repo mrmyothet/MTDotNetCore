@@ -147,7 +147,19 @@ namespace MTDotNetCore.RestApi.Controllers
         [HttpDelete("{id}")]
         public IActionResult DeleteBlog(int id)
         {
-            return Ok();
+            var item = FindById(id);
+
+            if (item is null)
+            {
+                return NotFound("No data found for the Id: " + id);
+            }
+
+            string query = @"DELETE FROM [dbo].[Tbl_Blog] WHERE BlogId = @BlogId";
+
+            int result = _adoDotNetService.Execute(query, new AdoDotNetParameter("@BlogId", id));
+
+            string message = result > 0 ? "Delete Successful." : "Delete Failed.";
+            return Ok(message);
         }
         private BlogModel FindById(int Id)
         {
