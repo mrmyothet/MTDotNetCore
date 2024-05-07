@@ -11,6 +11,9 @@ C# => Db
 - 2024-04-22--Dapper
 - 2024-04-23--EFCore 
 - 2024-04-24--ASP.NET Core Web API EFCore CRUD 
+- 2024-04-29--ASP.NET Core Web API Dapper CRUD
+- 2024-05-01--ASP.NET Core Web API Ado.Net CRUD
+- 2024-05-01--ASP.NET Core Web API Dapper Custom Service
 
 ---
 
