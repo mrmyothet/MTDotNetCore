@@ -1,12 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using MTDotNetCore.RestApiWithNLayer.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MTDotNetCore.RestApiWithNLayer.Db
+﻿namespace MTDotNetCore.RestApiWithNLayer.Db
 {
     internal class AppDbContext : DbContext
     {
