@@ -16,7 +16,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MTDotNetCore.RestApi", "MTD
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MTDotNetCore.Shared", "MTDotNetCore.Shared\MTDotNetCore.Shared.csproj", "{4DA28117-82FC-41BA-BC1A-2AFBC8085DF2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MTDotNetCore.RestApiWithNLayer", "MTDotNetCore.RestApiWithNLayer\MTDotNetCore.RestApiWithNLayer.csproj", "{B9D248AF-D84E-4BD8-B332-0FE17D32D8F8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MTDotNetCore.RestApiWithNLayer", "MTDotNetCore.RestApiWithNLayer\MTDotNetCore.RestApiWithNLayer.csproj", "{B9D248AF-D84E-4BD8-B332-0FE17D32D8F8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MTDotNetCore.ConsoleAppHttpClient", "MTDotNetCore.ConsoleAppHttpClient\MTDotNetCore.ConsoleAppHttpClient.csproj", "{CF19762F-A592-431D-8DDE-F6F3BDFB5885}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,6 +42,10 @@ Global
 		{B9D248AF-D84E-4BD8-B332-0FE17D32D8F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B9D248AF-D84E-4BD8-B332-0FE17D32D8F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B9D248AF-D84E-4BD8-B332-0FE17D32D8F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF19762F-A592-431D-8DDE-F6F3BDFB5885}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF19762F-A592-431D-8DDE-F6F3BDFB5885}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF19762F-A592-431D-8DDE-F6F3BDFB5885}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF19762F-A592-431D-8DDE-F6F3BDFB5885}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
