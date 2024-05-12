@@ -59,6 +59,21 @@ namespace MTDotNetCore.RestApiWithNLayer.Features.Blog
             return Ok(message);
         }
 
+        [HttpPatch("{id}")]
+        public IActionResult Patch(int id, BlogModel blog)
+        {
+            var item = _bL_Blog.GetBlog(id);
+            if (item is null)
+            {
+                return NotFound("No data found for the Id: " + id);
+            }
+
+            var result = _bL_Blog.PatchBlog(id, blog);
+            string message = result > 0 ? "Patch Successful" : "Patch Failed";
+
+            return Ok(message);
+        }
+
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
