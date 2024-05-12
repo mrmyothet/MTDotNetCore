@@ -17,6 +17,14 @@ namespace MTDotNetCore.RestApiWithNLayer.Features.LatHtaukBayDin
             var model = JsonConvert.DeserializeObject<LatHtaukBayDin>(jsonData);
             return Ok(model.questions);
         }
+
+        [HttpGet("number")]
+        public async Task<IActionResult> NumberList()
+        {
+            var jsonData = await System.IO.File.ReadAllTextAsync("data.json");
+            var model = JsonConvert.DeserializeObject<LatHtaukBayDin>(jsonData);
+            return Ok(model.numberList);
+        }
     }
 
 
