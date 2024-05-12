@@ -9,20 +9,25 @@ namespace MTDotNetCore.RestApiWithNLayer.Features.LatHtaukBayDin
     [ApiController]
     public class LatHtaukBayDinController : ControllerBase
     {
+        private async Task<LatHtaukBayDin> GetDataAsync() 
+        {
+            var jsonData = await System.IO.File.ReadAllTextAsync("data.json");
+            var model = JsonConvert.DeserializeObject<LatHtaukBayDin>(jsonData);
+            return model;
+        }
+
         // End Point - api/LatHtaukBayDin/questions
         [HttpGet("questions")]
         public async Task<IActionResult> Questions()
         {
-            var jsonData = await System.IO.File.ReadAllTextAsync("data.json");
-            var model = JsonConvert.DeserializeObject<LatHtaukBayDin>(jsonData);
+            var model = await GetDataAsync();
             return Ok(model.questions);
         }
 
         [HttpGet("number")]
         public async Task<IActionResult> NumberList()
         {
-            var jsonData = await System.IO.File.ReadAllTextAsync("data.json");
-            var model = JsonConvert.DeserializeObject<LatHtaukBayDin>(jsonData);
+            var model = await GetDataAsync();
             return Ok(model.numberList);
         }
     }
