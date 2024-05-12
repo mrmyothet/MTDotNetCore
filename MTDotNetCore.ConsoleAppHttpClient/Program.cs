@@ -1,7 +1,16 @@
-﻿Console.WriteLine("Hello, World!");
+﻿using Newtonsoft.Json;
+
+Console.WriteLine("Hello, World!");
 
 string jsonStr = await File.ReadAllTextAsync("data.json");
-Console.WriteLine(jsonStr);
+//Console.WriteLine(jsonStr);
+
+var model = JsonConvert.DeserializeObject<MainDto>(jsonStr);
+
+foreach (var question in model.questions)
+{
+    Console.WriteLine(question.questionNo);
+}
 
 Console.ReadLine();
 
