@@ -22,7 +22,10 @@ namespace MTDotNetCore.ConsoleAppHttpClientExamples
 
             //await DeleteAsync(100);
 
-            await CreateAsync("title 1", "author 2", "content 3");
+            //await CreateAsync("title 1", "author 2", "content 3");
+            //await EditAsync(4014);
+
+            await UpdateAsync(4014, "updated title", "author", "content");
             await EditAsync(4014);
         }
 
@@ -104,6 +107,26 @@ namespace MTDotNetCore.ConsoleAppHttpClientExamples
 
             HttpContent requestContent = new StringContent(jsonContent, Encoding.UTF8, Application.Json);//"application/json"
             var response = await _httpClient.PostAsync(_blogEndpoint, requestContent);
+            if (response.IsSuccessStatusCode)
+            {
+                string message = await response.Content.ReadAsStringAsync();
+                Console.WriteLine(message);
+            }
+        }
+
+        private async Task UpdateAsync(int id, string title, string author, string content)
+        {
+            BlogObject objBlog = new BlogObject()
+            {
+                BlogTitle = title,
+                BlogAuthor = author,
+                BlogContent = content
+            };
+
+            string jsonContent = JsonConvert.SerializeObject(objBlog);
+            HttpContent requestContent = new StringContent(jsonContent, Encoding.UTF8, Application.Json);
+            var response = await _httpClient.PutAsync($"{_blogEndpoint}/{id}", requestContent);
+
             if (response.IsSuccessStatusCode)
             {
                 string message = await response.Content.ReadAsStringAsync();
