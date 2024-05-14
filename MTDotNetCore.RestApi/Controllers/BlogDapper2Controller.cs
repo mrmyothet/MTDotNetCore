@@ -19,7 +19,7 @@ namespace MTDotNetCore.RestApi.Controllers
         {
             string query = "select * from tbl_blog";
             var lst = _dapperService.Query<BlogModel>(query);
-            
+
             return Ok(lst);
         }
 
@@ -28,7 +28,8 @@ namespace MTDotNetCore.RestApi.Controllers
         {
             var item = FindById(id);
 
-            if (item is null) { 
+            if (item is null)
+            {
                 return NotFound("No data found for Id: " + id);
             }
 
@@ -136,11 +137,11 @@ namespace MTDotNetCore.RestApi.Controllers
             return Ok(message);
         }
 
-        private BlogModel? FindById(int id) 
+        private BlogModel? FindById(int id)
         {
             string query = "select * from tbl_blog where blogid = @BlogId";
 
-            var item = _dapperService.QueryFirstOrDefault<BlogModel>(query, new BlogModel { BlogId = id});
+            var item = _dapperService.QueryFirstOrDefault<BlogModel>(query, new BlogModel { BlogId = id });
 
             return item;
         }

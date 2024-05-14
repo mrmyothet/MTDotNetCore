@@ -18,7 +18,7 @@ namespace MTDotNetCore.ConsoleAppHttpClientExamples
             await ReadAsync();
         }
 
-        private async Task ReadAsync() 
+        private async Task ReadAsync()
         {
             var response = await _httpClient.GetAsync(_blogEndpoint);
 

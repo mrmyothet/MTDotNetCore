@@ -28,7 +28,7 @@ namespace MTDotNetCore.RestApi.Controllers
         {
             string query = "select * from tbl_blog where BlogId = @BlogId";
 
-            var lst = _adoDotNetService.Query<BlogModel>(query, 
+            var lst = _adoDotNetService.Query<BlogModel>(query,
                 new AdoDotNetParameter("BlogId", id));
 
             var item = lst.FirstOrDefault();
@@ -81,8 +81,8 @@ namespace MTDotNetCore.RestApi.Controllers
                             ,[BlogContent] = @BlogContent
                             WHERE [BlogId] = @BlogId";
 
-            int result = _adoDotNetService.Execute(query, 
-                new AdoDotNetParameter ("@BlogTitle", blog.BlogTitle),
+            int result = _adoDotNetService.Execute(query,
+                new AdoDotNetParameter("@BlogTitle", blog.BlogTitle),
                 new AdoDotNetParameter("@BlogAuthor", blog.BlogAuthor),
                 new AdoDotNetParameter("@BlogContent", blog.BlogContent),
                 new AdoDotNetParameter("@BlogId", id)
@@ -164,7 +164,7 @@ namespace MTDotNetCore.RestApi.Controllers
         private BlogModel FindById(int Id)
         {
             string query = "select * from tbl_blog where BlogId = @BlogId";
-            
+
             var lst = _adoDotNetService.Query<BlogModel>(query,
                 new AdoDotNetParameter("BlogId", Id));
 

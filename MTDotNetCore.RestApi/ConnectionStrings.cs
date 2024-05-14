@@ -17,6 +17,5 @@ namespace MTDotNetCore.RestApi
             Password = "admin123!",
             TrustServerCertificate = true
         };
-
     }
 }

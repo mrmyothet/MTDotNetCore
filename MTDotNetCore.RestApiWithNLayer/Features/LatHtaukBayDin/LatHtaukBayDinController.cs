@@ -9,7 +9,7 @@ namespace MTDotNetCore.RestApiWithNLayer.Features.LatHtaukBayDin
     [ApiController]
     public class LatHtaukBayDinController : ControllerBase
     {
-        private async Task<LatHtaukBayDin> GetDataAsync() 
+        private async Task<LatHtaukBayDin> GetDataAsync()
         {
             var jsonData = await System.IO.File.ReadAllTextAsync("data.json");
             var model = JsonConvert.DeserializeObject<LatHtaukBayDin>(jsonData);
@@ -35,7 +35,7 @@ namespace MTDotNetCore.RestApiWithNLayer.Features.LatHtaukBayDin
         public async Task<IActionResult> Answer(int questionNo, int answerNo)
         {
             var model = await GetDataAsync();
-            var result = model.answers.FirstOrDefault(x=> x.questionNo == questionNo && x.answerNo == answerNo);
+            var result = model.answers.FirstOrDefault(x => x.questionNo == questionNo && x.answerNo == answerNo);
             return Ok(result);
         }
     }

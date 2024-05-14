@@ -41,7 +41,7 @@ namespace MTDotNetCore.Shared
             return item!;
         }
 
-        public int Execute(string query, object? param = null) 
+        public int Execute(string query, object? param = null)
         {
             int result = 0;
 

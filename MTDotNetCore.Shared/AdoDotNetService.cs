@@ -71,9 +71,7 @@ namespace MTDotNetCore.Shared
     public class AdoDotNetParameter
     {
         public string Name { get; set; }
-
         public object Value { get; set; }
-
         public AdoDotNetParameter(string name, object value)
         {
             Name = name;

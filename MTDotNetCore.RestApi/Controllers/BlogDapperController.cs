@@ -29,7 +29,8 @@ namespace MTDotNetCore.RestApi.Controllers
 
             var item = FindById(id);
 
-            if (item is null) { 
+            if (item is null)
+            {
                 return NotFound("No data found for Id: " + id);
             }
 
@@ -91,7 +92,7 @@ namespace MTDotNetCore.RestApi.Controllers
 
             string conditions = string.Empty;
 
-            if (!string.IsNullOrEmpty(blog.BlogTitle)) 
+            if (!string.IsNullOrEmpty(blog.BlogTitle))
             {
                 conditions += "[BlogTitle] = @BlogTitle, ";
             }
@@ -143,7 +144,7 @@ namespace MTDotNetCore.RestApi.Controllers
             return Ok(message);
         }
 
-        private BlogModel? FindById(int id) 
+        private BlogModel? FindById(int id)
         {
             string query = "select * from tbl_blog where blogid = @BlogId";
             using IDbConnection db = new SqlConnection(ConnectionStrings.sqlConnectionStringBuilder.ConnectionString);

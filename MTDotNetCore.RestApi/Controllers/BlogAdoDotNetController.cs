@@ -189,13 +189,13 @@ namespace MTDotNetCore.RestApi.Controllers
             SqlCommand cmd = new SqlCommand(query, connection);
 
             cmd.Parameters.AddWithValue("@BlogId", id);
-            if(blog.BlogTitle is not null)
+            if (blog.BlogTitle is not null)
                 cmd.Parameters.AddWithValue("@BlogTitle", blog.BlogTitle);
 
-            if(blog.BlogAuthor is not null)
+            if (blog.BlogAuthor is not null)
                 cmd.Parameters.AddWithValue("@BlogAuthor", blog.BlogAuthor);
 
-            if(blog.BlogContent is not null)
+            if (blog.BlogContent is not null)
                 cmd.Parameters.AddWithValue("@BlogContent", blog.BlogContent);
 
             int result = cmd.ExecuteNonQuery();

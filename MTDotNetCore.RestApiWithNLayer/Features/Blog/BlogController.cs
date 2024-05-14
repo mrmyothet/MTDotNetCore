@@ -15,7 +15,6 @@ namespace MTDotNetCore.RestApiWithNLayer.Features.Blog
             _bL_Blog = new BL_Blog();
         }
 
-
         [HttpGet]
         public IActionResult Read()
         {

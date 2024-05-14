@@ -31,7 +31,7 @@ namespace MTDotNetCore.RestApi.Controllers
         [HttpGet("{id}")]
         public IActionResult Edit(int id)
         {
-            var item = _context.Blogs.FirstOrDefault(x=> x.BlogId == id);
+            var item = _context.Blogs.FirstOrDefault(x => x.BlogId == id);
             if (item is null)
             {
                 return NotFound("No data found with the Id: " + id);
@@ -53,7 +53,7 @@ namespace MTDotNetCore.RestApi.Controllers
         [HttpPut("{id}")]
         public IActionResult Update(int id, BlogModel blog)
         {
-            var item = _context.Blogs.FirstOrDefault(x=> x.BlogId == id);
+            var item = _context.Blogs.FirstOrDefault(x => x.BlogId == id);
             if (item is null)
             {
                 return NotFound("No data found for the Id: " + id);
@@ -79,15 +79,15 @@ namespace MTDotNetCore.RestApi.Controllers
                 return NotFound("No data found for the Id: " + id);
             }
 
-            if(!string.IsNullOrEmpty(blog.BlogTitle))
+            if (!string.IsNullOrEmpty(blog.BlogTitle))
                 item.BlogTitle = blog.BlogTitle;
 
-            if (!string.IsNullOrEmpty(blog.BlogAuthor)) 
+            if (!string.IsNullOrEmpty(blog.BlogAuthor))
                 item.BlogAuthor = blog.BlogAuthor;
 
-            if(!string.IsNullOrEmpty(blog.BlogContent))
+            if (!string.IsNullOrEmpty(blog.BlogContent))
                 item.BlogContent = blog.BlogContent;
-            
+
             var result = _context.SaveChanges();
 
             string message = result > 0 ? "Updating Successful" : "Updating Failed";
@@ -98,7 +98,7 @@ namespace MTDotNetCore.RestApi.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var item = _context.Blogs.FirstOrDefault(x=> x.BlogId == id);
+            var item = _context.Blogs.FirstOrDefault(x => x.BlogId == id);
             if (item is null)
             {
                 return NotFound("No data found with the Id: " + id);

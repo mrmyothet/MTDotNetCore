@@ -36,7 +36,7 @@ namespace MTDotNetCore.RestApiWithNLayer.Features.Blog
         }
 
         public int PatchBlog(int id, BlogModel requestModel)
-        { 
+        {
             var result = _daBlog.PatchBlog(id, requestModel);
             return result;
         }
