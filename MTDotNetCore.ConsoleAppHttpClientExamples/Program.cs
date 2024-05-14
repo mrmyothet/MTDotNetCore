@@ -1,11 +1,11 @@
-﻿using MTDotNetCore.ConsoleAppHttpClientExamples;
+﻿using MTDotNetCore.ConsoleAppHttpClientExample;
 using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
 Console.WriteLine("Hello, World!");
 
-HttpClientExamples httpClientExample = new HttpClientExamples();
+HttpClientExample httpClientExample = new HttpClientExample();
 await httpClientExample.RunAsync();
 
 Console.ReadLine();
