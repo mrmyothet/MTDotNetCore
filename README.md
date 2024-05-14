@@ -56,3 +56,7 @@ Application Environment (Stages)
 - SIT - System Integration Test - [ Software Developer & QA Engineer ]
 - UAT - User Acceptance Test - [ Client ]
 - PROD - Production - [ Public user ]
+
+### HTTPClient 
+- Console App - Client (Frontend)
+- ASP.NET Core Web API - Server (Backend)
