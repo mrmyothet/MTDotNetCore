@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace MTDotNetCore.ConsoleAppHttpClientExamples
 {
@@ -19,7 +20,10 @@ namespace MTDotNetCore.ConsoleAppHttpClientExamples
             //await EditAsync(1);
             //await EditAsync(100);
 
-            await DeleteAsync(100);
+            //await DeleteAsync(100);
+
+            await CreateAsync("title 1", "author 2", "content 3");
+            await EditAsync(4014);
         }
 
         private async Task ReadAsync()
@@ -85,7 +89,26 @@ namespace MTDotNetCore.ConsoleAppHttpClientExamples
                 // error message 
                 // break
             }
-            
+        }
+
+        private async Task CreateAsync(string title, string author, string content)
+        {
+            BlogObject objBlog = new BlogObject()
+            {
+                BlogTitle = title,
+                BlogAuthor = author,
+                BlogContent = content
+            };
+
+            string jsonContent = JsonConvert.SerializeObject(objBlog);
+
+            HttpContent requestContent = new StringContent(jsonContent, Encoding.UTF8, Application.Json);//"application/json"
+            var response = await _httpClient.PostAsync(_blogEndpoint, requestContent);
+            if (response.IsSuccessStatusCode)
+            {
+                string message = await response.Content.ReadAsStringAsync();
+                Console.WriteLine(message);
+            }
         }
 
         private async Task<BlogObject?> FindByIdAsync(int id)
