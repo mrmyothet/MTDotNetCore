@@ -25,8 +25,14 @@ internal class HttpClientExamples
         //await CreateAsync("title 1", "author 2", "content 3");
         //await EditAsync(4014);
 
-        await UpdateAsync(4014, "updated title", "author", "content");
-        await EditAsync(4014);
+        //await UpdateAsync(4014, "updated title", "author", "content");
+        //await EditAsync(4014);
+
+        //await PatchAsync(4013, null, "updated author", null);
+        //await EditAsync(4013);
+
+        await PatchAsync(4013, "updated title", "", "updated content");
+        await EditAsync(4013);
     }
 
     private async Task ReadAsync()
@@ -126,6 +132,26 @@ internal class HttpClientExamples
         string jsonContent = JsonConvert.SerializeObject(objBlog);
         HttpContent requestContent = new StringContent(jsonContent, Encoding.UTF8, Application.Json);
         var response = await _httpClient.PutAsync($"{_blogEndpoint}/{id}", requestContent);
+
+        if (response.IsSuccessStatusCode)
+        {
+            string message = await response.Content.ReadAsStringAsync();
+            Console.WriteLine(message);
+        }
+    }
+
+    private async Task PatchAsync(int id, string title, string author, string content)
+    {
+        BlogObject objBlog = new BlogObject()
+        {
+            BlogTitle = title,
+            BlogAuthor = author,
+            BlogContent = content
+        };
+
+        string jsonContent = JsonConvert.SerializeObject(objBlog);
+        HttpContent requestContent = new StringContent(jsonContent, Encoding.UTF8, Application.Json);
+        var response = await _httpClient.PatchAsync($"{_blogEndpoint}/{id}", requestContent);
 
         if (response.IsSuccessStatusCode)
         {

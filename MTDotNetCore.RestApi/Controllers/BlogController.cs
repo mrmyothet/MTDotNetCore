@@ -90,7 +90,7 @@ namespace MTDotNetCore.RestApi.Controllers
 
             var result = _context.SaveChanges();
 
-            string message = result > 0 ? "Updating Successful" : "Updating Failed";
+            string message = result > 0 ? "Patch Successful" : "Patch Failed";
 
             return Ok(message);
         }

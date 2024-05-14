@@ -6,6 +6,6 @@ using System.Text.Json.Serialization;
 Console.WriteLine("Hello, World!");
 
 HttpClientExamples httpClientExample = new HttpClientExamples();
-httpClientExample.RunAsync();
+await httpClientExample.RunAsync();
 
 Console.ReadLine();
