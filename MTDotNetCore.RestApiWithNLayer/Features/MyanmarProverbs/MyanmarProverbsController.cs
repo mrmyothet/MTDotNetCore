@@ -49,7 +49,7 @@ public class MyanmarProverbsController : ControllerBase
         return Ok(lst);
     }
 
-    [HttpGet("titleId")]
+    [HttpGet("{titleId}")]
     public async Task<IActionResult> GetProverTitleOnly(int titleId)
     {
         var model = await GetDataFromJsonFile();
@@ -64,6 +64,16 @@ public class MyanmarProverbsController : ControllerBase
         }).ToList();
 
         return Ok(lst);
+    }
+
+    [HttpGet("{titleId}/{proverbId}")]
+    public async Task<IActionResult> Get(int titleId, int proverbId)
+    {
+        var model = await GetDataFromJsonFile();
+        var item = model.Tbl_MMProverbs.Where(x => x.TitleId == titleId && x.ProverbId == proverbId).FirstOrDefault();
+        if (item is null) return NotFound($"Data Not Found for titleId: {titleId} and proverbId: {proverbId}");
+
+        return Ok(item);
     }
 }
 
