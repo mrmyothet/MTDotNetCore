@@ -14,7 +14,7 @@ public class MyanmarProverbsController : ControllerBase
 
         HttpClient client = new HttpClient();
         var response = await client.GetAsync(myanmarProverbsJsonUrl);
-        if(response.IsSuccessStatusCode) 
+        if (response.IsSuccessStatusCode)
         {
             string jsonStr = await response.Content.ReadAsStringAsync();
             var model = JsonConvert.DeserializeObject<MyanmarProverbs>(jsonStr);
@@ -23,11 +23,32 @@ public class MyanmarProverbsController : ControllerBase
         return null;
     }
 
+    private async Task<MyanmarProverbs> GetDataFromJsonFile()
+    {
+        string fileName = "MyanmarProverbs.json";
+
+        string jsonStr = await System.IO.File.ReadAllTextAsync(fileName);
+        var model = JsonConvert.DeserializeObject<MyanmarProverbs>(jsonStr);
+        return model;
+    }
+
     [HttpGet]
     public async Task<IActionResult> Get()
     {
         var model = await GetDataFromApiAsync();
         return Ok(model.Tbl_MMProverbsTitle);
+    }
+
+    [HttpGet("titleName")]
+    public async Task<IActionResult> Get(string titleName)
+    {
+        var model = await GetDataFromJsonFile();
+        var item = model.Tbl_MMProverbsTitle.Where(x => x.TitleName == titleName).FirstOrDefault();
+        if (item is null) return NotFound($"No data found for proverb title : {titleName}");
+
+        int titleId = item.TitleId;
+        var lst = model.Tbl_MMProverbs.Where(x => x.TitleId == titleId);
+        return Ok(lst);
     }
 }
 
