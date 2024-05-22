@@ -9,9 +9,10 @@ namespace MTDotNetCore.RestApiWithNLayer.Features.LatHtaukBayDin
     [ApiController]
     public class LatHtaukBayDinController : ControllerBase
     {
+        private readonly string _jsonFileName = "dataLatHtaukBayDin.json";
         private async Task<LatHtaukBayDin> GetDataAsync()
         {
-            var jsonData = await System.IO.File.ReadAllTextAsync("data.json");
+            var jsonData = await System.IO.File.ReadAllTextAsync(_jsonFileName);
             var model = JsonConvert.DeserializeObject<LatHtaukBayDin>(jsonData);
             return model;
         }

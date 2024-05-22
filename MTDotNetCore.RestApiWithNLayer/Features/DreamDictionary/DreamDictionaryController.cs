@@ -8,9 +8,10 @@ namespace MTDotNetCore.RestApiWithNLayer.Features.DreamDictionary;
 [ApiController]
 public class DreamDictionaryController : ControllerBase
 {
+    private readonly string _jsonFileName = "dataDreamDictionary.json";
     private async Task<DreamDictionary> GetDataAsync()
     {
-        string jsonData = await System.IO.File.ReadAllTextAsync("DreamDictionary.json");
+        string jsonData = await System.IO.File.ReadAllTextAsync(_jsonFileName);
         var model = JsonConvert.DeserializeObject<DreamDictionary>(jsonData);
         return model;
     }

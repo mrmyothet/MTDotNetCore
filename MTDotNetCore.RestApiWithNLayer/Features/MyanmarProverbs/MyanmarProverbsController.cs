@@ -8,26 +8,24 @@ namespace MTDotNetCore.RestApiWithNLayer.Features.MyanmarProverbs;
 [ApiController]
 public class MyanmarProverbsController : ControllerBase
 {
+    private readonly string _myanmarProverbsJsonUrl = "https://raw.githubusercontent.com/sannlynnhtun-coding/Myanmar-Proverbs/main/MyanmarProverbs.json";
+
+    private readonly string _jsonFileName = "dataMyanmarProverbs.json";
+
     private async Task<MyanmarProverbs> GetDataFromApiAsync()
     {
-        string myanmarProverbsJsonUrl = "https://raw.githubusercontent.com/sannlynnhtun-coding/Myanmar-Proverbs/main/MyanmarProverbs.json";
-
         HttpClient client = new HttpClient();
-        var response = await client.GetAsync(myanmarProverbsJsonUrl);
-        if (response.IsSuccessStatusCode)
-        {
-            string jsonStr = await response.Content.ReadAsStringAsync();
-            var model = JsonConvert.DeserializeObject<MyanmarProverbs>(jsonStr);
-            return model;
-        }
-        return null;
+        var response = await client.GetAsync(_myanmarProverbsJsonUrl);
+        if (!response.IsSuccessStatusCode) return null;
+
+        string jsonStr = await response.Content.ReadAsStringAsync();
+        var model = JsonConvert.DeserializeObject<MyanmarProverbs>(jsonStr);
+        return model;
     }
 
     private async Task<MyanmarProverbs> GetDataFromJsonFile()
     {
-        string fileName = "MyanmarProverbs.json";
-
-        string jsonStr = await System.IO.File.ReadAllTextAsync(fileName);
+        string jsonStr = await System.IO.File.ReadAllTextAsync(_jsonFileName);
         var model = JsonConvert.DeserializeObject<MyanmarProverbs>(jsonStr);
         return model;
     }
@@ -50,6 +48,23 @@ public class MyanmarProverbsController : ControllerBase
         var lst = model.Tbl_MMProverbs.Where(x => x.TitleId == titleId);
         return Ok(lst);
     }
+
+    [HttpGet("titleId")]
+    public async Task<IActionResult> GetProverTitleOnly(int titleId)
+    {
+        var model = await GetDataFromJsonFile();
+        var result = model.Tbl_MMProverbs.Where(x => x.TitleId == titleId);
+
+        List<Tbl_MmproverbsHead> lst = result.Select(x => new Tbl_MmproverbsHead
+        {
+            TitleId = x.TitleId,
+            ProverbId = x.ProverbId,
+            ProverbName = x.ProverbName
+
+        }).ToList();
+
+        return Ok(lst);
+    }
 }
 
 public class MyanmarProverbs
@@ -70,4 +85,11 @@ public class Tbl_Mmproverbs
     public int ProverbId { get; set; }
     public string ProverbName { get; set; }
     public string ProverbDesp { get; set; }
+}
+
+public class Tbl_MmproverbsHead
+{
+    public int TitleId { get; set; }
+    public int ProverbId { get; set; }
+    public string ProverbName { get; set; }
 }
