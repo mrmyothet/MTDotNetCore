@@ -18,11 +18,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MTDotNetCore.Shared", "MTDo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MTDotNetCore.RestApiWithNLayer", "MTDotNetCore.RestApiWithNLayer\MTDotNetCore.RestApiWithNLayer.csproj", "{B9D248AF-D84E-4BD8-B332-0FE17D32D8F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MTDotNetCore.ConsoleAppHttpClient", "MTDotNetCore.ConsoleAppHttpClient\MTDotNetCore.ConsoleAppHttpClient.csproj", "{CF19762F-A592-431D-8DDE-F6F3BDFB5885}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MTDotNetCore.ConsoleAppHttpClient", "MTDotNetCore.ConsoleAppHttpClient\MTDotNetCore.ConsoleAppHttpClient.csproj", "{CF19762F-A592-431D-8DDE-F6F3BDFB5885}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MTDotNetCore.ConsoleAppHttpClientExample", "MTDotNetCore.ConsoleAppHttpClientExamples\MTDotNetCore.ConsoleAppHttpClientExample.csproj", "{74FEDC1D-7FCC-4F01-A2EC-ECA4AE87AF7B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MTDotNetCore.ConsoleAppHttpClientExample", "MTDotNetCore.ConsoleAppHttpClientExamples\MTDotNetCore.ConsoleAppHttpClientExample.csproj", "{74FEDC1D-7FCC-4F01-A2EC-ECA4AE87AF7B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MTDotNetCore.ConsoleAppRestClientExample", "MTDotNetCore.ConsoleAppRestClientExamples\MTDotNetCore.ConsoleAppRestClientExample.csproj", "{04F12E78-5EA9-42F9-9470-278326B32EDC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MTDotNetCore.ConsoleAppRestClientExample", "MTDotNetCore.ConsoleAppRestClientExamples\MTDotNetCore.ConsoleAppRestClientExample.csproj", "{04F12E78-5EA9-42F9-9470-278326B32EDC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MTDotNetCore.PizzaApi", "MTDotNetCore.PizzaApi\MTDotNetCore.PizzaApi.csproj", "{A1E85AA2-C120-43D2-BD2F-DC205A784C42}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -58,6 +60,10 @@ Global
 		{04F12E78-5EA9-42F9-9470-278326B32EDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{04F12E78-5EA9-42F9-9470-278326B32EDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{04F12E78-5EA9-42F9-9470-278326B32EDC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1E85AA2-C120-43D2-BD2F-DC205A784C42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1E85AA2-C120-43D2-BD2F-DC205A784C42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1E85AA2-C120-43D2-BD2F-DC205A784C42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1E85AA2-C120-43D2-BD2F-DC205A784C42}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
