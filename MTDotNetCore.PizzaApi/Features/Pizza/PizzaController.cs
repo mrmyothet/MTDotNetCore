@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Client;
+using System.Linq;
+using System.Runtime.InteropServices;
 
 namespace MTDotNetCore.PizzaApi.Features.Pizza
 {
@@ -93,6 +95,35 @@ namespace MTDotNetCore.PizzaApi.Features.Pizza
                 Total = totalAmount,
                 Message = "Thank you for your order! Enjoy your pizza.",
                 Pizza = pizza,
+                Extras = lstExtras,
+            };
+
+            return Ok(response);
+        }
+
+        [HttpGet("Order/{invoiceNo}")]
+        public async Task<IActionResult> GetOrder(string invoiceNo)
+        {
+            var itemOrder = await _dbContext.PizzaOrders.FirstOrDefaultAsync(x => x.PizzaOrderInvoiceNo == invoiceNo);
+            if (itemOrder is null) return NotFound("No data found for Invoice No: " + invoiceNo);
+
+            var lstDetails = await _dbContext.PizzaOrdersDetails.Where(x => x.PizzaOrderInvoiceNo == invoiceNo).ToListAsync();
+
+            PizzaModel itemPizza = _dbContext.Pizzas.FirstOrDefault(x => x.Id == itemOrder.PizzaId)!;
+            List<PizzaExtraModel> lstExtras = new List<PizzaExtraModel>();
+            foreach (var detail in lstDetails)
+            {
+                var itemExtra = _dbContext.PizzaExtras.FirstOrDefault(x => x.Id == detail.PizzaExtraId);
+                if (itemExtra is null) continue; 
+
+                lstExtras.Add(itemExtra);
+            }
+
+            PizzaOrderResponse response = new PizzaOrderResponse()
+            {
+                InvoiceNo = invoiceNo,
+                Total = itemOrder.TotalAmount,
+                Pizza = itemPizza, 
                 Extras = lstExtras,
             };
 
