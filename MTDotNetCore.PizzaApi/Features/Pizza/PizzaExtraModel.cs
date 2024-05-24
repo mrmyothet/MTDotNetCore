@@ -20,5 +20,4 @@ public class PizzaExtraModel
     {
         get { return "$ " + Price; }
     }
-
 }

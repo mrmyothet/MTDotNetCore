@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Client;
+using MTDotNetCore.PizzaApi.Queries;
 using System.Linq;
 using System.Runtime.InteropServices;
 
@@ -114,7 +115,7 @@ namespace MTDotNetCore.PizzaApi.Features.Pizza
             foreach (var detail in lstDetails)
             {
                 var itemExtra = _dbContext.PizzaExtras.FirstOrDefault(x => x.Id == detail.PizzaExtraId);
-                if (itemExtra is null) continue; 
+                if (itemExtra is null) continue;
 
                 lstExtras.Add(itemExtra);
             }
@@ -123,8 +124,33 @@ namespace MTDotNetCore.PizzaApi.Features.Pizza
             {
                 InvoiceNo = invoiceNo,
                 Total = itemOrder.TotalAmount,
-                Pizza = itemPizza, 
+                Pizza = itemPizza,
                 Extras = lstExtras,
+            };
+
+            return Ok(response);
+        }
+
+        [HttpGet("OrderInvoice/{invoiceNo}")]
+        public IActionResult GetOrderInvlice(string invoiceNo)
+        {
+
+            DapperService dapperService = new DapperService(ConnectionStrings.sqlConnectionStringBuilder.ConnectionString);
+
+            var item = dapperService.QueryFirstOrDefault<PizzaOrderInvoiceHeadModel>(
+                PizzaQuery.PizzaOrderQuery,
+                new { PizzaOrderInvoiceNo = invoiceNo }
+                );
+
+            var lst = dapperService.Query<PizzaOrderInvoiceDetailModel>(
+                PizzaQuery.PizzaOrderDetailQuery,
+                new { PizzaOrderInvoiceNo = invoiceNo }
+                );
+
+            PizzaOrderInvoiceResponse response = new PizzaOrderInvoiceResponse
+            {
+                Order = item,
+                OrderDetail = lst,
             };
 
             return Ok(response);

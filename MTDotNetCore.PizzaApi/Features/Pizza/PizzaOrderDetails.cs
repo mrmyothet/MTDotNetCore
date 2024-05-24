@@ -10,6 +10,4 @@ public class PizzaOrderDetails
     public int PizzaOrderDetailsId { get; set; }
     public string PizzaOrderInvoiceNo { get; set; }
     public int PizzaExtraId { get; set; }
-
-
 }

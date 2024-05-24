@@ -11,6 +11,5 @@
         public PizzaModel Pizza { get; set; }
 
         public List<PizzaExtraModel> Extras { get; set; }
-
     }
 }
