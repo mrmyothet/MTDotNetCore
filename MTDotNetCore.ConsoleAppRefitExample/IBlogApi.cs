@@ -1,0 +1,14 @@
+﻿using Refit;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MTDotNetCore.ConsoleAppRefitExample;
+
+public  interface IBlogApi
+{
+    [Get("/api/blog")]
+    Task<List<Blog>> GetBlogs();
+}
