@@ -1,6 +1,6 @@
 ﻿namespace MTDotNetCore.WinFormsApp
 {
-    partial class FrmBlog
+    partial class Form1
     {
         /// <summary>
         ///  Required designer variable.
