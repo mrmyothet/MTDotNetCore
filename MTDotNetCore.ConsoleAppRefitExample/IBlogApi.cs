@@ -17,4 +17,7 @@ public  interface IBlogApi
 
     [Post("/api/blog")]
     Task<string> CreateBlog(Blog newBlog);
+
+    [Put("/api/blog/{id}")]
+    Task<string> UpdateBlog(int id, Blog updateBlog);
 }

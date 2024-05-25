@@ -71,4 +71,24 @@ public class RefitExample
             Console.WriteLine(ex.Content);
         }
     }
+
+    public async Task UpdateAsync(int id, string updateTitle, string updateAuthor, string updateContent)
+    {
+        Blog item = new Blog() { 
+            BlogId = id,
+            BlogTitle = updateTitle, 
+            BlogAuthor = updateAuthor, 
+            BlogContent = updateContent,
+        };
+
+        try
+        {
+            string message = await _blogApi.UpdateBlog(id, item);
+        }
+        catch (Refit.ApiException ex)
+        {
+            Console.WriteLine(ex.StatusCode.ToString());
+            Console.WriteLine(ex.Content);
+        }
+    }
 }
