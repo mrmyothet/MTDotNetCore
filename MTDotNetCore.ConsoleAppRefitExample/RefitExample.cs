@@ -9,17 +9,14 @@ namespace MTDotNetCore.ConsoleAppRefitExample;
 
 public class RefitExample
 {
-    private readonly IBlogApi _blogApi = RestService.For<IBlogApi>("https://localhost:7289");
+    private readonly IBlogApi _blogApi;
 
-    public async Task RunAsync()
+    public RefitExample(string applicationUrl)
     {
-        //await ReadAsync();
-
-        await EditAsync(1);
-        await EditAsync(100);
+        _blogApi = RestService.For<IBlogApi>(applicationUrl);
     }
 
-    private async Task ReadAsync()
+    public async Task ReadAsync()
     {
         var lst = await _blogApi.GetBlogs();
         foreach (var item in lst)
@@ -32,7 +29,7 @@ public class RefitExample
         }
     }
 
-    private async Task EditAsync(int id)
+    public async Task EditAsync(int id)
     {
         try
         {
@@ -55,4 +52,23 @@ public class RefitExample
         }
     }
 
+    public async Task CreateAsync(string title, string author, string content)
+    {
+        Blog newBlog = new Blog()
+        {
+            BlogTitle = title,
+            BlogAuthor = author,
+            BlogContent = content,
+        };
+
+        try
+        {
+            string message = await _blogApi.CreateBlog(newBlog);
+            Console.WriteLine(message);
+        }
+        catch (Refit.ApiException ex)
+        {
+            Console.WriteLine(ex.Content);
+        }
+    }
 }
