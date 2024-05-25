@@ -84,6 +84,42 @@ public class RefitExample
         try
         {
             string message = await _blogApi.UpdateBlog(id, item);
+            Console.WriteLine(message);
+        }
+        catch (Refit.ApiException ex)
+        {
+            Console.WriteLine(ex.StatusCode.ToString());
+            Console.WriteLine(ex.Content);
+        }
+    }
+
+    public async Task PatchAsync(int id, string patchTitle, string patchAuthor, string patchContent)
+    {
+        Blog item = new Blog() {
+            BlogId = id, 
+            BlogTitle = patchTitle, 
+            BlogAuthor = patchAuthor, 
+            BlogContent = patchContent,
+        };
+
+        try
+        {
+            string message = await _blogApi.PatchBlog(id, item);
+            Console.WriteLine(message);
+        }
+        catch (Refit.ApiException ex)
+        {
+            Console.WriteLine(ex.StatusCode.ToString());
+            Console.WriteLine(ex.Content);
+        }
+    }
+
+    public async Task DeleteAsync(int id)
+    {
+        try
+        {
+            string message = await _blogApi.DeleteBlog(id);
+            Console.WriteLine(message);
         }
         catch (Refit.ApiException ex)
         {

@@ -13,3 +13,9 @@ await refitExample.ReadAsync();
 
 //await refitExample.UpdateAsync(4018, "Update Title", "Update Author", "Update Content");
 //await refitExample.EditAsync(4018);
+
+await refitExample.PatchAsync(4019, "Patch Title", "", "");
+await refitExample.EditAsync(4019);
+
+await refitExample.DeleteAsync(4018);
+await refitExample.EditAsync(4018);
