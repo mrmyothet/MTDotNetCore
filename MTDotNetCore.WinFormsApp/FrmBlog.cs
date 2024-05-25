@@ -3,10 +3,10 @@ using MTDotNetCore.WinFormsApp.Models;
 
 namespace MTDotNetCore.WinFormsApp
 {
-    public partial class Form1 : Form
+    public partial class FrmBlog : Form
     {
         DapperService _dapperService;
-        public Form1()
+        public FrmBlog()
         {
             InitializeComponent();
             _dapperService = new DapperService(ConnectionStrings.builder.ConnectionString);
