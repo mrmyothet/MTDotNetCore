@@ -13,7 +13,10 @@ public class RefitExample
 
     public async Task RunAsync()
     {
-        await ReadAsync();
+        //await ReadAsync();
+
+        await EditAsync(1);
+        await EditAsync(100);
     }
 
     private async Task ReadAsync()
@@ -26,6 +29,29 @@ public class RefitExample
             Console.WriteLine($"Author => {item.BlogAuthor}");
             Console.WriteLine($"Content => {item.BlogContent}");
             Console.WriteLine("==========");
+        }
+    }
+
+    private async Task EditAsync(int id)
+    {
+        try
+        {
+            var item = await _blogApi.GetBlog(id);
+
+            Console.WriteLine($"Id => {item.BlogId}");
+            Console.WriteLine($"Title => {item.BlogTitle}");
+            Console.WriteLine($"Author => {item.BlogAuthor}");
+            Console.WriteLine($"Content => {item.BlogContent}");
+            Console.WriteLine("==========");
+        }
+        catch (Refit.ApiException ex)
+        {
+            Console.WriteLine(ex.StatusCode.ToString());
+            Console.WriteLine(ex.Content);
+        }
+        catch (System.Exception ex)
+        {
+            Console.WriteLine(ex.Message);
         }
     }
 

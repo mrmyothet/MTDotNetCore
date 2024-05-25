@@ -11,4 +11,7 @@ public  interface IBlogApi
 {
     [Get("/api/blog")]
     Task<List<Blog>> GetBlogs();
+
+    [Get("/api/blog/{id}")]
+    Task<Blog> GetBlog(int id);
 }
