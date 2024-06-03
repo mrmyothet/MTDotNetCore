@@ -23,4 +23,6 @@ internal class BlogQuery
                                       ,[BlogContent]
                                   FROM [dbo].[Tbl_Blog]";
 
+    public static string DeleteQuery = "DELETE FROM [dbo].[Tbl_Blog] WHERE BlogId = @BlogId";
+
 }

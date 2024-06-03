@@ -52,6 +52,7 @@
             dgvBlog.RowTemplate.Height = 25;
             dgvBlog.Size = new Size(800, 450);
             dgvBlog.TabIndex = 0;
+            dgvBlog.CellContentClick += dgvBlog_CellContentClick;
             // 
             // colId
             // 
@@ -78,7 +79,7 @@
             colDelete.ReadOnly = true;
             colDelete.Resizable = DataGridViewTriState.True;
             colDelete.SortMode = DataGridViewColumnSortMode.Automatic;
-            colDelete.Text = "Edit";
+            colDelete.Text = "Delete";
             colDelete.UseColumnTextForButtonValue = true;
             // 
             // colTitle
