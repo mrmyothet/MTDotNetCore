@@ -53,6 +53,7 @@
             // 
             // colId
             // 
+            colId.DataPropertyName = "BlogId";
             colId.HeaderText = "ID";
             colId.Name = "colId";
             colId.ReadOnly = true;
@@ -60,18 +61,21 @@
             // 
             // colTitle
             // 
+            colTitle.DataPropertyName = "BlogTitle";
             colTitle.HeaderText = "Title";
             colTitle.Name = "colTitle";
             colTitle.ReadOnly = true;
             // 
             // colAuthor
             // 
+            colAuthor.DataPropertyName = "BlogAuthor";
             colAuthor.HeaderText = "Author";
             colAuthor.Name = "colAuthor";
             colAuthor.ReadOnly = true;
             // 
             // colContent
             // 
+            colContent.DataPropertyName = "BlogContent";
             colContent.HeaderText = "Content";
             colContent.Name = "colContent";
             colContent.ReadOnly = true;

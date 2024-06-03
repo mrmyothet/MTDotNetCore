@@ -1,5 +1,6 @@
 ﻿using MTDotNetCore.Shared;
 using MTDotNetCore.WinFormsApp.Models;
+using MTDotNetCore.WinFormsApp.Queries;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,11 +21,12 @@ namespace MTDotNetCore.WinFormsApp
         {
             InitializeComponent();
             _dapperService = new DapperService(ConnectionStrings.builder.ConnectionString);
+            dgvBlog.AutoGenerateColumns = false;
         }
 
         private void FrmBlogList_Load(object sender, EventArgs e)
         {
-            List<BlogModel> lst = _dapperService.Query<BlogModel>("select * from Tbl_Blog");
+            List<BlogModel> lst = _dapperService.Query<BlogModel>(BlogQuery.SelectQuery);
             dgvBlog.DataSource = lst;
         }
     }
