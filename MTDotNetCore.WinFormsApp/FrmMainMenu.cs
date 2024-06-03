@@ -22,5 +22,11 @@ namespace MTDotNetCore.WinFormsApp
             FrmBlog newBlog = new FrmBlog();
             newBlog.ShowDialog();
         }
+
+        private void blogsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmBlogList blogListForm = new FrmBlogList();
+            blogListForm.ShowDialog();
+        }
     }
 }
