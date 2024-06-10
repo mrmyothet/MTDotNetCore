@@ -40,16 +40,23 @@ namespace MTDotNetCore.WinFormsApp
 
         private void dgvBlog_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex == -1) return;
+
+            int blogId = Convert.ToInt32(dgvBlog.Rows[e.RowIndex].Cells["colId"].Value);
+
             if (e.ColumnIndex == (int)EnumFormControlType.Edit) 
             {
-                
+                FrmBlog blogForm = new FrmBlog(blogId);
+                blogForm.ShowDialog();
+
+                // Load data again to see updated record
+                LoadBlogList();
             }
             if (e.ColumnIndex == (int)EnumFormControlType.Delete)
             {
                 var dialogResult = MessageBox.Show("Are you sure to delete it?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dialogResult != DialogResult.Yes) return;
-
-                int blogId = Convert.ToInt32(dgvBlog.Rows[e.RowIndex].Cells["colId"].Value);
+                
                 int result = DeleteBlog(blogId);
                 string message = result > 0 ? "Delete Successful!" : "Delete Failed";
                 MessageBox.Show(message);

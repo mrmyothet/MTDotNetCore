@@ -36,6 +36,7 @@
             txtContent = new TextBox();
             btnSave = new Button();
             btnCancel = new Button();
+            btnUpdate = new Button();
             SuspendLayout();
             // 
             // lblTitle
@@ -44,7 +45,7 @@
             lblTitle.Location = new Point(150, 37);
             lblTitle.Margin = new Padding(0);
             lblTitle.Name = "lblTitle";
-            lblTitle.Size = new Size(81, 37);
+            lblTitle.Size = new Size(41, 19);
             lblTitle.TabIndex = 0;
             lblTitle.Text = "Title :";
             // 
@@ -53,7 +54,7 @@
             lblAuthor.AutoSize = true;
             lblAuthor.Location = new Point(150, 123);
             lblAuthor.Name = "lblAuthor";
-            lblAuthor.Size = new Size(111, 37);
+            lblAuthor.Size = new Size(59, 19);
             lblAuthor.TabIndex = 1;
             lblAuthor.Text = "Author :";
             // 
@@ -62,7 +63,7 @@
             lblContent.AutoSize = true;
             lblContent.Location = new Point(150, 209);
             lblContent.Name = "lblContent";
-            lblContent.Size = new Size(132, 37);
+            lblContent.Size = new Size(70, 19);
             lblContent.TabIndex = 2;
             lblContent.Text = "Content : ";
             // 
@@ -70,14 +71,14 @@
             // 
             txtTitle.Location = new Point(150, 77);
             txtTitle.Name = "txtTitle";
-            txtTitle.Size = new Size(623, 43);
+            txtTitle.Size = new Size(623, 25);
             txtTitle.TabIndex = 3;
             // 
             // txtAuthor
             // 
             txtAuthor.Location = new Point(150, 163);
             txtAuthor.Name = "txtAuthor";
-            txtAuthor.Size = new Size(623, 43);
+            txtAuthor.Size = new Size(623, 25);
             txtAuthor.TabIndex = 4;
             // 
             // txtContent
@@ -116,11 +117,27 @@
             btnCancel.UseVisualStyleBackColor = false;
             btnCancel.Click += btnCancel_Click;
             // 
+            // btnUpdate
+            // 
+            btnUpdate.BackColor = Color.FromArgb(192, 192, 255);
+            btnUpdate.FlatAppearance.BorderSize = 0;
+            btnUpdate.FlatStyle = FlatStyle.Flat;
+            btnUpdate.ForeColor = SystemColors.HighlightText;
+            btnUpdate.Location = new Point(310, 445);
+            btnUpdate.Name = "btnUpdate";
+            btnUpdate.Size = new Size(154, 51);
+            btnUpdate.TabIndex = 8;
+            btnUpdate.Text = "&Update";
+            btnUpdate.UseVisualStyleBackColor = false;
+            btnUpdate.Visible = false;
+            btnUpdate.Click += btnUpdate_Click;
+            // 
             // FrmBlog
             // 
-            AutoScaleDimensions = new SizeF(15F, 37F);
+            AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(923, 697);
+            Controls.Add(btnUpdate);
             Controls.Add(btnCancel);
             Controls.Add(btnSave);
             Controls.Add(txtContent);
@@ -147,5 +164,6 @@
         private TextBox txtContent;
         private Button btnSave;
         private Button btnCancel;
+        private Button btnUpdate;
     }
 }
