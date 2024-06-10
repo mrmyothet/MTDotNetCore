@@ -44,25 +44,48 @@ namespace MTDotNetCore.WinFormsApp
 
             int blogId = Convert.ToInt32(dgvBlog.Rows[e.RowIndex].Cells["colId"].Value);
 
-            if (e.ColumnIndex == (int)EnumFormControlType.Edit) 
-            {
-                FrmBlog blogForm = new FrmBlog(blogId);
-                blogForm.ShowDialog();
+            //if (e.ColumnIndex == (int)EnumFormControlType.Edit) 
+            //{
+            //    FrmBlog blogForm = new FrmBlog(blogId);
+            //    blogForm.ShowDialog();
 
-                // Load data again to see updated record
-                LoadBlogList();
-            }
-            if (e.ColumnIndex == (int)EnumFormControlType.Delete)
-            {
-                var dialogResult = MessageBox.Show("Are you sure to delete it?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (dialogResult != DialogResult.Yes) return;
+            //    LoadBlogList();
+            //}
+            //if (e.ColumnIndex == (int)EnumFormControlType.Delete)
+            //{
+            //    var dialogResult = MessageBox.Show("Are you sure to delete it?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            //    if (dialogResult != DialogResult.Yes) return;
                 
-                int result = DeleteBlog(blogId);
-                string message = result > 0 ? "Delete Successful!" : "Delete Failed";
-                MessageBox.Show(message);
+            //    int result = DeleteBlog(blogId);
+            //    string message = result > 0 ? "Delete Successful!" : "Delete Failed";
+            //    MessageBox.Show(message);
 
-                // Load data again to disapper deleted record
-                LoadBlogList();
+            //    LoadBlogList();
+            //}
+
+            EnumFormControlType enumFormControlType = (EnumFormControlType)e.ColumnIndex;
+            switch (enumFormControlType)
+            {
+                case EnumFormControlType.Edit:
+                    FrmBlog blogForm = new FrmBlog(blogId);
+                    blogForm.ShowDialog();
+
+                    LoadBlogList();
+                    break;
+                case EnumFormControlType.Delete:
+                    var dialogResult = MessageBox.Show("Are you sure to delete it?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (dialogResult != DialogResult.Yes) return;
+
+                    int result = DeleteBlog(blogId);
+                    string message = result > 0 ? "Delete Successful!" : "Delete Failed";
+                    MessageBox.Show(message);
+
+                    LoadBlogList();
+                    break;
+                case EnumFormControlType.None:
+                default:
+                    MessageBox.Show("Invalid Case.");
+                    break;
             }
         }
 
