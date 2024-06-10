@@ -17,8 +17,11 @@ namespace MTDotNetCore.WinFormsAppSqlnjection
             string password = txtPassword.Text.Trim();
             // 123' or 1=1 + '
 
-            string query = $"select * from tbl_user where email = '{email}' and password='{password}'";
-            var model = _dapperService.QueryFirstOrDefault<UserModel>(query);
+            string query = $"select * from tbl_user where email = @Email and password=@Password";
+            var model = _dapperService.QueryFirstOrDefault<UserModel>(query, new { 
+                Email = email,
+                Password = password
+            });
 
             if (model is null)
             {
