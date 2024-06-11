@@ -28,7 +28,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MTDotNetCore.PizzaApi", "MT
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MTDotNetCore.ConsoleAppRefitExample", "MTDotNetCore.ConsoleAppRefitExample\MTDotNetCore.ConsoleAppRefitExample.csproj", "{12406ECA-6E24-43F5-AE8A-86F8DB199DDC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MTDotNetCore.WinFormsApp", "MTDotNetCore.WinFormsApp\MTDotNetCore.WinFormsApp.csproj", "{6F711C3A-F01E-4697-B5F3-150C55A12E6C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MTDotNetCore.WinFormsApp", "MTDotNetCore.WinFormsApp\MTDotNetCore.WinFormsApp.csproj", "{6F711C3A-F01E-4697-B5F3-150C55A12E6C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MTDotNetCore.WinFormsAppSqlnjection", "MTDotNetCore.WinFormsAppSqlnjection\MTDotNetCore.WinFormsAppSqlnjection.csproj", "{7AB303C7-5F4B-481C-9A74-9A637A0C9D96}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MTDotNetCore.NLayer.UI", "MTDotNetCore.NLayer.UI\MTDotNetCore.NLayer.UI.csproj", "{2B7796F9-45C8-4B1E-8A3E-501E81439785}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MTDotNetCore.NLayer.BusinessLogic", "MTDotNetCore.NLayer.BusinessLogic\MTDotNetCore.NLayer.BusinessLogic.csproj", "{4E6F0033-946A-4E79-98BA-1824CBDEC6C2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MTDotNetCore.NLayer.DataAccess", "MTDotNetCore.NLayer.DataAccess\MTDotNetCore.NLayer.DataAccess.csproj", "{B6D1F430-7DD5-4CF8-A14C-BF0BE11430DD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -76,6 +84,22 @@ Global
 		{6F711C3A-F01E-4697-B5F3-150C55A12E6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6F711C3A-F01E-4697-B5F3-150C55A12E6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6F711C3A-F01E-4697-B5F3-150C55A12E6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7AB303C7-5F4B-481C-9A74-9A637A0C9D96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AB303C7-5F4B-481C-9A74-9A637A0C9D96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AB303C7-5F4B-481C-9A74-9A637A0C9D96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AB303C7-5F4B-481C-9A74-9A637A0C9D96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B7796F9-45C8-4B1E-8A3E-501E81439785}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B7796F9-45C8-4B1E-8A3E-501E81439785}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B7796F9-45C8-4B1E-8A3E-501E81439785}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B7796F9-45C8-4B1E-8A3E-501E81439785}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E6F0033-946A-4E79-98BA-1824CBDEC6C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E6F0033-946A-4E79-98BA-1824CBDEC6C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E6F0033-946A-4E79-98BA-1824CBDEC6C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E6F0033-946A-4E79-98BA-1824CBDEC6C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6D1F430-7DD5-4CF8-A14C-BF0BE11430DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6D1F430-7DD5-4CF8-A14C-BF0BE11430DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6D1F430-7DD5-4CF8-A14C-BF0BE11430DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6D1F430-7DD5-4CF8-A14C-BF0BE11430DD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

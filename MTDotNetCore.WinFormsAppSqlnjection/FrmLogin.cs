@@ -18,7 +18,8 @@ namespace MTDotNetCore.WinFormsAppSqlnjection
             // 123' or 1=1 + '
 
             string query = $"select * from tbl_user where email = @Email and password=@Password";
-            var model = _dapperService.QueryFirstOrDefault<UserModel>(query, new { 
+            var model = _dapperService.QueryFirstOrDefault<UserModel>(query, new 
+            { 
                 Email = email,
                 Password = password
             });
