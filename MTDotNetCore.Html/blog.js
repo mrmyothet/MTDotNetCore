@@ -2,9 +2,14 @@ const tblBlog = "blogs";
 
 console.log("Hello World from Console");
 
-createBlog("test title", "test author", "test content");
+readBlog();
+// createBlog("test title", "test author", "test content");
 
 
+function readBlog(){
+    const blogs = localStorage.getItem(tblBlog);
+    console.log(blogs);
+}
 
 function createBlog(title, author, content) {
 
@@ -17,7 +22,6 @@ function createBlog(title, author, content) {
 
     let lst = [];
     let blogs = localStorage.getItem(tblBlog);
-    console.log("blogs: " + blogs);
     if (blogs !== null) {
         lst = JSON.parse(blogs);
     }
@@ -26,7 +30,6 @@ function createBlog(title, author, content) {
     const jsonList = JSON.stringify(lst);
 
     localStorage.setItem(tblBlog, jsonList);
-    console.log(jsonList);
 }
 
 function uuidv4() {
@@ -34,3 +37,4 @@ function uuidv4() {
         (+c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> +c / 4).toString(16)
     );
 }
+
