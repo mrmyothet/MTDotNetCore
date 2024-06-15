@@ -4,6 +4,7 @@ console.log("Hello World from Console");
 
 readBlog();
 // createBlog("test title", "test author", "test content");
+updateBlog("800343db-584d-4a43-90bb-4ce39cbdb95d", "updated title", "updated author", "updated content");
 
 
 function readBlog(){
@@ -38,3 +39,29 @@ function uuidv4() {
     );
 }
 
+function updateBlog(id, UpdateTitle, updateAuthor, updateContent){
+    const blogs = localStorage.getItem(tblBlog);
+    if(blogs === null){
+        console.log("There is no data in the database.");
+        return;
+    }
+    
+    let lst = JSON.parse(blogs);
+    let items = lst.filter(x=> x.id === id);
+    if(items.length < 1){
+        console.log("No data found with Id: " + id);
+        return;
+    }
+
+    let updateItem = items[0];
+    updateItem.title = UpdateTitle;
+    updateItem.author = updateAuthor;
+    updateItem.content = updateContent;
+
+    const index = lst.findIndex(x=> x.id === id);
+    lst[index] = updateItem;
+
+    const jsonBlog = JSON.stringify(lst);
+    localStorage.setItem(tblBlog, jsonBlog);
+    
+}
