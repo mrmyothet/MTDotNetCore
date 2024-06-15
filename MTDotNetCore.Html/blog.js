@@ -4,13 +4,13 @@ console.log("Hello World from Console");
 
 readBlog();
 // createBlog("test title", "test author", "test content");
-// updateBlog("800343db-584d-4a43-90bb-4ce39cbdb95d", "updated title", "updated author", "updated content");
-deleteBlog("7cdeb770-5e83-4b56-b00e-0391ecd544d5");
+// updateBlog("800343db-584d-4a43-90bb-4ce39cbdb95d", "title", "author", "content");
+// deleteBlog("7cdeb770-5e83-4b56-b00e-0391ecd544d5");
 
 
 function readBlog() {
-    const blogs = localStorage.getItem(tblBlog);
-    console.log(blogs);
+    let lst = getBlogs();
+    console.log(lst);
 }
 
 function createBlog(title, author, content) {
@@ -22,11 +22,7 @@ function createBlog(title, author, content) {
         content: content
     };
 
-    let lst = [];
-    let blogs = localStorage.getItem(tblBlog);
-    if (blogs !== null) {
-        lst = JSON.parse(blogs);
-    }
+    let lst = getBlogs();
     lst.push(requestModel);
 
     const jsonList = JSON.stringify(lst);
@@ -41,13 +37,8 @@ function uuidv4() {
 }
 
 function updateBlog(id, UpdateTitle, updateAuthor, updateContent) {
-    const blogs = localStorage.getItem(tblBlog);
-    if (blogs === null) {
-        console.log("There is no data in the database.");
-        return;
-    }
+    let lst = getBlogs();
 
-    let lst = JSON.parse(blogs);
     let items = lst.filter(x => x.id === id);
     if (items.length < 1) {
         console.log("No data found with Id: " + id);
@@ -64,17 +55,10 @@ function updateBlog(id, UpdateTitle, updateAuthor, updateContent) {
 
     const jsonBlog = JSON.stringify(lst);
     localStorage.setItem(tblBlog, jsonBlog);
-
 }
 
 function deleteBlog(id) {
-    const blogs = localStorage.getItem(tblBlog);
-    if (blogs === null) {
-        console.log("There is no data in the database.");
-        return;
-    }
-
-    let lst = JSON.parse(blogs);
+    let lst = getBlogs();
 
     let item = lst.filter(x => x.id === id);
     if (item.length === 0) {
@@ -87,5 +71,15 @@ function deleteBlog(id) {
 
     const jsonBlogs = JSON.stringify(lst);
     localStorage.setItem(tblBlog, jsonBlogs);
+}
 
+function getBlogs(){
+    const blogs = localStorage.getItem(tblBlog);
+    if (blogs === null) {
+        console.log("There is no data in the database.");
+        return;
+    }
+
+    let lst = JSON.parse(blogs);
+    return lst;
 }
