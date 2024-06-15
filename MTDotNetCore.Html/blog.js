@@ -4,10 +4,11 @@ console.log("Hello World from Console");
 
 readBlog();
 // createBlog("test title", "test author", "test content");
-updateBlog("800343db-584d-4a43-90bb-4ce39cbdb95d", "updated title", "updated author", "updated content");
+// updateBlog("800343db-584d-4a43-90bb-4ce39cbdb95d", "updated title", "updated author", "updated content");
+deleteBlog("7cdeb770-5e83-4b56-b00e-0391ecd544d5");
 
 
-function readBlog(){
+function readBlog() {
     const blogs = localStorage.getItem(tblBlog);
     console.log(blogs);
 }
@@ -39,16 +40,16 @@ function uuidv4() {
     );
 }
 
-function updateBlog(id, UpdateTitle, updateAuthor, updateContent){
+function updateBlog(id, UpdateTitle, updateAuthor, updateContent) {
     const blogs = localStorage.getItem(tblBlog);
-    if(blogs === null){
+    if (blogs === null) {
         console.log("There is no data in the database.");
         return;
     }
-    
+
     let lst = JSON.parse(blogs);
-    let items = lst.filter(x=> x.id === id);
-    if(items.length < 1){
+    let items = lst.filter(x => x.id === id);
+    if (items.length < 1) {
         console.log("No data found with Id: " + id);
         return;
     }
@@ -58,10 +59,33 @@ function updateBlog(id, UpdateTitle, updateAuthor, updateContent){
     updateItem.author = updateAuthor;
     updateItem.content = updateContent;
 
-    const index = lst.findIndex(x=> x.id === id);
+    const index = lst.findIndex(x => x.id === id);
     lst[index] = updateItem;
 
     const jsonBlog = JSON.stringify(lst);
     localStorage.setItem(tblBlog, jsonBlog);
-    
+
+}
+
+function deleteBlog(id) {
+    const blogs = localStorage.getItem(tblBlog);
+    if (blogs === null) {
+        console.log("There is no data in the database.");
+        return;
+    }
+
+    let lst = JSON.parse(blogs);
+
+    let item = lst.filter(x => x.id === id);
+    if (item.length === 0) {
+        console.log("No data found with Id: " + id);
+        return;
+    }
+
+    // Get the remaining items only
+    lst = lst.filter(x => x.id !== id);
+
+    const jsonBlogs = JSON.stringify(lst);
+    localStorage.setItem(tblBlog, jsonBlogs);
+
 }
