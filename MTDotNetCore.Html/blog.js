@@ -132,7 +132,7 @@ function getBlogTable() {
        <tr>
             <td>
                 <button type="button" class="btn btn-warning" onclick="editBlog('${item.id}')">Edit</button>
-                <button type="button" class="btn btn-danger" onclick="Delete('${item.id}')">Delete</button>
+                <button type="button" class="btn btn-danger" onclick="deleteButtonClick('${item.id}')">Delete</button>
             </td>
             <td>${++count}</td>
             <td>${item.title}</td>
@@ -163,4 +163,15 @@ function editBlog(id) {
     $('#txtAuthor').val(item.author);
     $('#txtContent').val(item.content);
     $('#txtTitle').focus();
+}
+
+function deleteButtonClick(id){
+    let result = confirm("are you sure want to delete?");
+    if(!result) return;
+
+    deleteBlog(id);
+
+    successMessage("Deleting Successful.");
+
+    getBlogTable();
 }
