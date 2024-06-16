@@ -26,7 +26,6 @@ function createBlog(title, author, content) {
     lst.push(requestModel);
 
     const jsonList = JSON.stringify(lst);
-
     localStorage.setItem(tblBlog, jsonList);
 }
 
@@ -73,13 +72,39 @@ function deleteBlog(id) {
     localStorage.setItem(tblBlog, jsonBlogs);
 }
 
-function getBlogs(){
+function getBlogs() {
+    let lst = [];
     const blogs = localStorage.getItem(tblBlog);
     if (blogs === null) {
         console.log("There is no data in the database.");
-        return;
+        return lst;
     }
 
-    let lst = JSON.parse(blogs);
+    lst = JSON.parse(blogs);
     return lst;
+}
+
+$('#btnSave').click(function () {
+    const title = $('#txtTitle').val();
+    const author = $('#txtQuthor').val();
+    const content = $('#txtContent').val();
+
+    createBlog(title, author, content);
+    successMessage("Saving Successful");
+    clearControls();
+});
+
+function successMessage(message){
+    alert(message);
+}
+
+function errorMessage(message){
+    alert(message);
+}
+
+function clearControls(){
+    $('#txtTitle').val('');
+    $('#txtAuthor').val('');
+    $('#txtContent').val('');
+    $('#txtTitle').focus();
 }
