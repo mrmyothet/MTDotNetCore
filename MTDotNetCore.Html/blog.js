@@ -2,7 +2,9 @@ const tblBlog = "blogs";
 
 console.log("Hello World from Console");
 
-readBlog();
+// readBlog();
+getBlogTable();
+
 // createBlog("test title", "test author", "test content");
 // updateBlog("800343db-584d-4a43-90bb-4ce39cbdb95d", "title", "author", "content");
 // deleteBlog("7cdeb770-5e83-4b56-b00e-0391ecd544d5");
@@ -86,12 +88,13 @@ function getBlogs() {
 
 $('#btnSave').click(function () {
     const title = $('#txtTitle').val();
-    const author = $('#txtQuthor').val();
+    const author = $('#txtAuthor').val();
     const content = $('#txtContent').val();
 
     createBlog(title, author, content);
     successMessage("Saving Successful");
     clearControls();
+    getBlogTable();
 });
 
 function successMessage(message){
@@ -107,4 +110,24 @@ function clearControls(){
     $('#txtAuthor').val('');
     $('#txtContent').val('');
     $('#txtTitle').focus();
+}
+
+function getBlogTable(){
+    const lst = getBlogs();
+    let count = 0;
+    let htmlRows = '';
+    lst.forEach(item => {
+       const htmlRow = `
+       <tr>
+            <td>${++count}</td>
+            <td>${item.title}</td>
+            <td>${item.author}</td>
+            <td>${item.content}</td>
+       </tr>
+       `;
+
+       htmlRows += htmlRow;
+    });
+
+    $('#tbody').html(htmlRows);
 }
