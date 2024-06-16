@@ -1,4 +1,5 @@
 const tblBlog = "blogs";
+let editBlogId = null;
 
 console.log("Hello World from Console");
 
@@ -91,34 +92,48 @@ $('#btnSave').click(function () {
     const author = $('#txtAuthor').val();
     const content = $('#txtContent').val();
 
-    createBlog(title, author, content);
-    successMessage("Saving Successful");
+    if (editBlogId === null) {
+        createBlog(title, author, content);
+        successMessage("Saving Successful.");
+    }
+    else {
+        updateBlog(editBlogId, title, author, content);
+        successMessage("Updating Successful.");
+
+        // Reset blog Id of Edit
+        editBlogId = null;
+    }
+
     clearControls();
     getBlogTable();
 });
 
-function successMessage(message){
+function successMessage(message) {
     alert(message);
 }
 
-function errorMessage(message){
+function errorMessage(message) {
     alert(message);
 }
 
-function clearControls(){
+function clearControls() {
     $('#txtTitle').val('');
     $('#txtAuthor').val('');
     $('#txtContent').val('');
     $('#txtTitle').focus();
 }
 
-function getBlogTable(){
+function getBlogTable() {
     const lst = getBlogs();
     let count = 0;
     let htmlRows = '';
     lst.forEach(item => {
-       const htmlRow = `
+        const htmlRow = `
        <tr>
+            <td>
+                <button type="button" class="btn btn-warning" onclick="editBlog('${item.id}')">Edit</button>
+                <button type="button" class="btn btn-danger" onclick="Delete('${item.id}')">Delete</button>
+            </td>
             <td>${++count}</td>
             <td>${item.title}</td>
             <td>${item.author}</td>
@@ -126,8 +141,26 @@ function getBlogTable(){
        </tr>
        `;
 
-       htmlRows += htmlRow;
+        htmlRows += htmlRow;
     });
 
     $('#tbody').html(htmlRows);
+}
+
+function editBlog(id) {
+    let lst = getBlogs();
+
+    const items = lst.filter(x => x.id === id);
+    if (items.length == 0) {
+        errorMessage("No data Found with Id: " + id);
+        return;
+    }
+
+    const item = items[0];
+    editBlogId = item.id;
+
+    $('#txtTitle').val(item.title);
+    $('#txtAuthor').val(item.author);
+    $('#txtContent').val(item.content);
+    $('#txtTitle').focus();
 }
