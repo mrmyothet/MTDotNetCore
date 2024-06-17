@@ -124,6 +124,25 @@ function errorMessage(message) {
     });
 }
 
+function confirmMessage(message) {
+    let confirmResult = false;
+    Notiflix.Confirm.show(
+        'Confirm',
+        message,
+        'Yes',
+        'No',
+        function okCb() {
+            confirmResult = true;
+        },
+        function cancelCb() {
+            confirmResult = false;
+        },
+        {
+        },
+    );
+    return confirmResult;
+}
+
 function clearControls() {
     $('#txtTitle').val('');
     $('#txtAuthor').val('');
@@ -173,13 +192,21 @@ function editBlog(id) {
     $('#txtTitle').focus();
 }
 
-function deleteButtonClick(id){
-    let result = confirm("are you sure want to delete?");
-    if(!result) return;
-
-    deleteBlog(id);
-
-    successMessage("Deleting Successful.");
-
-    getBlogTable();
+function deleteButtonClick(id) {
+    Notiflix.Confirm.show(
+        'Confirm',
+        "Are you sure want to delete",
+        'Yes',
+        'No',
+        function okCb() {
+            deleteBlog(id);
+            successMessage("Deleting Successful.");
+            getBlogTable();
+        },
+        function cancelCb() {
+            return;
+        },
+        {
+        },
+    );
 }
