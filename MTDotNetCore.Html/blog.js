@@ -109,11 +109,19 @@ $('#btnSave').click(function () {
 });
 
 function successMessage(message) {
-    alert(message);
+    Swal.fire({
+        title: "Success!",
+        text: message,
+        icon: "success"
+    });
 }
 
 function errorMessage(message) {
-    alert(message);
+    Swal.fire({
+        title: "Error!",
+        text: message,
+        icon: "error"
+    });
 }
 
 function clearControls() {
