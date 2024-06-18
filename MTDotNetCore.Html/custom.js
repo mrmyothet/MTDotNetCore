@@ -5,38 +5,70 @@ function uuidv4() {
 }
 
 function successMessage(message) {
-    Swal.fire({
-        title: "Success!",
-        text: message,
-        icon: "success"
-    });
+    // Swal.fire({
+    //     title: "Success!",
+    //     text: message,
+    //     icon: "success"
+    // });
+
+    Notiflix.Report.success(
+        'Success',
+        message,
+        'Ok',
+    );
 }
 
 function errorMessage(message) {
-    Swal.fire({
-        title: "Error!",
-        text: message,
-        icon: "error"
-    });
+    // Swal.fire({
+    //     title: "Error!",
+    //     text: message,
+    //     icon: "error"
+    // });
+
+    Notiflix.Report.failure(
+        'Error',
+        message,
+        'Ok',
+    );
 }
 
 function confirmMessage(message) {
+    // let confirmMessageResult = new Promise(function (success, error) {
+    //     // "Producing Code" (May take some time)
+    //     Swal.fire({
+    //         title: "Confirm",
+    //         text: message,
+    //         icon: "warning",
+    //         showCancelButton: true,
+    //         confirmButtonColor: "#3085d6",
+    //         cancelButtonColor: "#d33",
+    //         confirmButtonText: "Yes"
+    //     }).then((result) => {
+    //         if (result.isConfirmed) {
+    //             success();
+    //         };
+    //         error();
+    //     }); 
+    // });
+
+    // return confirmMessageResult;
+
     let confirmMessageResult = new Promise(function (success, error) {
         // "Producing Code" (May take some time)
-        Swal.fire({
-            title: "Confirm",
-            text: message,
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes"
-        }).then((result) => {
-            if (result.isConfirmed) {
+        Notiflix.Confirm.show(
+            'Confirm',
+            message,
+            'Yes',
+            'No',
+            function okCb() {
                 success();
-            };
-            error();
-        }); 
+            },
+            function cancelCb() {
+                error();
+            },
+            {
+            },
+        );
     });
 
     return confirmMessageResult;
