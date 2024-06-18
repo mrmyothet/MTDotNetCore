@@ -19,3 +19,25 @@ function errorMessage(message) {
         icon: "error"
     });
 }
+
+function confirmMessage(message) {
+    let confirmMessageResult = new Promise(function (success, error) {
+        // "Producing Code" (May take some time)
+        Swal.fire({
+            title: "Confirm",
+            text: message,
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                success();
+            };
+            error();
+        }); 
+    });
+
+    return confirmMessageResult;
+}

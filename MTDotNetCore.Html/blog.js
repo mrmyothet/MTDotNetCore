@@ -10,27 +10,38 @@ getBlogTable();
 // updateBlog("800343db-584d-4a43-90bb-4ce39cbdb95d", "title", "author", "content");
 // deleteBlog("7cdeb770-5e83-4b56-b00e-0391ecd544d5");
 
-testPromise("Success");
+// testPromise("Success");
 
-function testPromise(message) {
-    let myPromise = new Promise(function (success, error) {
-        // "Producing Code" (May take some time)
-        let result = confirm("Are you sure want to delete");
+// function testPromise(message) {
+//     let myPromise = new Promise(function (success, error) {
+//         // "Producing Code" (May take some time)
+//         Swal.fire({
+//             title: "Confirm",
+//             text: "Are you sure want to delete?",
+//             icon: "warning",
+//             showCancelButton: true,
+//             confirmButtonColor: "#3085d6",
+//             cancelButtonColor: "#d33",
+//             confirmButtonText: "Yes"
+//         }).then((result) => {
+//             if (result.isConfirmed) {
+//                 success();
+//             };
+//             error();
 
-        if (result) success();  // when successful
-        else error();   // when error
-    });
+//         });
+//     });
 
-    // "Consuming Code" (Must wait for a fulfilled Promise)
-    myPromise.then(
-        function (value) {
-            successMessage(message)
-        },
-        function (error) {
-            errorMessage(message);
-        }
-    );
-}
+//     // "Consuming Code" (Must wait for a fulfilled Promise)
+//     myPromise.then(
+//         function (value) {
+//             successMessage(message)
+//         },
+//         function (error) {
+//             errorMessage(message);
+//         }
+//     );
+// }
 
 
 function readBlog() {
@@ -174,21 +185,34 @@ function editBlog(id) {
 }
 
 function deleteButtonClick(id) {
-    Swal.fire({
-        title: "Confirm",
-        text: "Are you sure want to delete?",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes"
-    }).then((result) => {
-        if (!result.isConfirmed) return;
 
-        deleteBlog(id);
-        successMessage("Deleting Successful");
-        getBlogTable();
-    });
+    // "Consuming Code" (Must wait for a fulfilled Promise)
+    confirmMessage("Are you sure want to delete").then(
+        function (value) {
+            deleteBlog(id);
+            successMessage("Deleting Successful.");
+            getBlogTable();
+        },
+        function(error){
+            return;
+        }
+    );
+
+    // Swal.fire({
+    //     title: "Confirm",
+    //     text: "Are you sure want to delete?",
+    //     icon: "warning",
+    //     showCancelButton: true,
+    //     confirmButtonColor: "#3085d6",
+    //     cancelButtonColor: "#d33",
+    //     confirmButtonText: "Yes"
+    // }).then((result) => {
+    //     if (!result.isConfirmed) return;
+
+    //     deleteBlog(id);
+    //     successMessage("Deleting Successful");
+    //     getBlogTable();
+    // });
 
     // Notiflix.Confirm.show(
     //     'Confirm',
