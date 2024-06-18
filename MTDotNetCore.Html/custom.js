@@ -11,11 +11,14 @@ function successMessage(message) {
     //     icon: "success"
     // });
 
-    Notiflix.Report.success(
-        'Success',
-        message,
-        'Ok',
-    );
+    // Notiflix.Report.success(
+    //     'Success',
+    //     message,
+    //     'Ok',
+    // );
+
+    Notiflix.Notify.success(message);
+
 }
 
 function errorMessage(message) {
@@ -25,11 +28,13 @@ function errorMessage(message) {
     //     icon: "error"
     // });
 
-    Notiflix.Report.failure(
-        'Error',
-        message,
-        'Ok',
-    );
+    // Notiflix.Report.failure(
+    //     'Error',
+    //     message,
+    //     'Ok',
+    // );
+
+    Notiflix.Notify.failure(message);
 }
 
 function confirmMessage(message) {
