@@ -1,10 +1,10 @@
-﻿using Dapper;
+﻿using System.Data;
+using System.Data.SqlClient;
+using Dapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MTDotNetCore.RestApi.Models;
 using MTDotNetCore.Shared;
-using System.Data;
-using System.Data.SqlClient;
 
 namespace MTDotNetCore.RestApi.Controllers
 {
@@ -12,7 +12,18 @@ namespace MTDotNetCore.RestApi.Controllers
     [ApiController]
     public class BlogDapper2Controller : ControllerBase
     {
-        private readonly DapperService _dapperService = new DapperService(ConnectionStrings.sqlConnectionStringBuilder.ConnectionString);
+        //private readonly DapperService _dapperService = new DapperService(
+        //    ConnectionStrings.sqlConnectionStringBuilder.ConnectionString
+        //);
+
+        // Replace with Dependency Injection configured at Program.cs
+
+        private readonly DapperService _dapperService;
+
+        public BlogDapper2Controller(DapperService dapperService)
+        {
+            _dapperService = dapperService;
+        }
 
         [HttpGet]
         public IActionResult GetBlogs()
@@ -39,7 +50,8 @@ namespace MTDotNetCore.RestApi.Controllers
         [HttpPost]
         public IActionResult CreateBlog(BlogModel blog)
         {
-            string query = @"INSERT INTO [dbo].[Tbl_Blog]
+            string query =
+                @"INSERT INTO [dbo].[Tbl_Blog]
                            ([BlogTitle]
                            ,[BlogAuthor]
                            ,[BlogContent])
@@ -63,8 +75,8 @@ namespace MTDotNetCore.RestApi.Controllers
                 return NotFound("No data found for Id: " + id);
             }
 
-
-            string query = @"UPDATE [dbo].[Tbl_Blog]
+            string query =
+                @"UPDATE [dbo].[Tbl_Blog]
                             SET [BlogTitle] = @BlogTitle
                             ,[BlogAuthor] = @BlogAuthor
                             ,[BlogContent] = @BlogContent
@@ -110,7 +122,8 @@ namespace MTDotNetCore.RestApi.Controllers
 
             conditions = conditions.Substring(0, conditions.Length - 2);
 
-            string query = $@"UPDATE [dbo].[Tbl_Blog]
+            string query =
+                $@"UPDATE [dbo].[Tbl_Blog]
                             SET {conditions}
                             WHERE [BlogId] = @BlogId";
 
@@ -141,7 +154,10 @@ namespace MTDotNetCore.RestApi.Controllers
         {
             string query = "select * from tbl_blog where blogid = @BlogId";
 
-            var item = _dapperService.QueryFirstOrDefault<BlogModel>(query, new BlogModel { BlogId = id });
+            var item = _dapperService.QueryFirstOrDefault<BlogModel>(
+                query,
+                new BlogModel { BlogId = id }
+            );
 
             return item;
         }

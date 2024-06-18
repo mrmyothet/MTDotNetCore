@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System.Data;
+using System.Data.SqlClient;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MTDotNetCore.RestApi.Models;
-using System.Data;
-using System.Data.SqlClient;
 using MTDotNetCore.Shared;
 
 namespace MTDotNetCore.RestApi.Controllers
@@ -11,7 +11,17 @@ namespace MTDotNetCore.RestApi.Controllers
     [ApiController]
     public class BlogAdoDotNet2Controller : ControllerBase
     {
-        private readonly AdoDotNetService _adoDotNetService = new AdoDotNetService(ConnectionStrings.sqlConnectionStringBuilder.ConnectionString);
+        //private readonly AdoDotNetService _adoDotNetService = new AdoDotNetService(
+        //    ConnectionStrings.sqlConnectionStringBuilder.ConnectionString
+        //);
+
+        // Replace with Dependency Injection configured at Program.cs
+        private readonly AdoDotNetService _adoDotNetService;
+
+        public BlogAdoDotNet2Controller(AdoDotNetService adoDotNetService)
+        {
+            _adoDotNetService = adoDotNetService;
+        }
 
         [HttpGet]
         public IActionResult GetBlogs()
@@ -28,8 +38,10 @@ namespace MTDotNetCore.RestApi.Controllers
         {
             string query = "select * from tbl_blog where BlogId = @BlogId";
 
-            var lst = _adoDotNetService.Query<BlogModel>(query,
-                new AdoDotNetParameter("BlogId", id));
+            var lst = _adoDotNetService.Query<BlogModel>(
+                query,
+                new AdoDotNetParameter("BlogId", id)
+            );
 
             var item = lst.FirstOrDefault();
 
@@ -42,7 +54,8 @@ namespace MTDotNetCore.RestApi.Controllers
         [HttpPost]
         public IActionResult CreateBlog(BlogModel blog)
         {
-            string query = @"INSERT INTO [dbo].[Tbl_Blog]
+            string query =
+                @"INSERT INTO [dbo].[Tbl_Blog]
            ([BlogTitle]
            ,[BlogAuthor]
            ,[BlogContent])
@@ -51,11 +64,12 @@ namespace MTDotNetCore.RestApi.Controllers
            ,@BlogAuthor
            ,@BlogContent)";
 
-            int result = _adoDotNetService.Execute(query,
+            int result = _adoDotNetService.Execute(
+                query,
                 new AdoDotNetParameter("@BlogTitle", blog.BlogTitle),
                 new AdoDotNetParameter("@BlogAuthor", blog.BlogAuthor),
                 new AdoDotNetParameter("@BlogContent", blog.BlogContent)
-                );
+            );
 
             string message = result > 0 ? "Saving successful." : "Saving failed.";
 
@@ -75,18 +89,20 @@ namespace MTDotNetCore.RestApi.Controllers
                 return NotFound("Data not found with the Id: " + id);
             }
 
-            string query = @"UPDATE [dbo].[Tbl_Blog]
+            string query =
+                @"UPDATE [dbo].[Tbl_Blog]
                             SET [BlogTitle] = @BlogTitle
                             ,[BlogAuthor] = @BlogAuthor
                             ,[BlogContent] = @BlogContent
                             WHERE [BlogId] = @BlogId";
 
-            int result = _adoDotNetService.Execute(query,
+            int result = _adoDotNetService.Execute(
+                query,
                 new AdoDotNetParameter("@BlogTitle", blog.BlogTitle),
                 new AdoDotNetParameter("@BlogAuthor", blog.BlogAuthor),
                 new AdoDotNetParameter("@BlogContent", blog.BlogContent),
                 new AdoDotNetParameter("@BlogId", id)
-                );
+            );
 
             string message = result > 0 ? "Update successful." : "Update failed.";
             return Ok(message);
@@ -102,7 +118,7 @@ namespace MTDotNetCore.RestApi.Controllers
                 return NotFound("Data not found with the Id: " + id);
             }
 
-            // Arrange query 
+            // Arrange query
             string conditions = string.Empty;
 
             if (!string.IsNullOrEmpty(blog.BlogTitle))
@@ -119,11 +135,12 @@ namespace MTDotNetCore.RestApi.Controllers
 
             conditions = conditions.Substring(0, conditions.Length - 2);
 
-            string query = $@"UPDATE [dbo].[Tbl_Blog]
+            string query =
+                $@"UPDATE [dbo].[Tbl_Blog]
                             SET {conditions}
                             WHERE [BlogId] = @BlogId";
 
-            // Arrange Parameters 
+            // Arrange Parameters
             List<AdoDotNetParameter> lstParameters = new List<AdoDotNetParameter>();
             lstParameters.Add(new AdoDotNetParameter("@BlogId", id));
 
@@ -143,7 +160,6 @@ namespace MTDotNetCore.RestApi.Controllers
             return Ok(message);
         }
 
-
         [HttpDelete("{id}")]
         public IActionResult DeleteBlog(int id)
         {
@@ -161,12 +177,15 @@ namespace MTDotNetCore.RestApi.Controllers
             string message = result > 0 ? "Delete Successful." : "Delete Failed.";
             return Ok(message);
         }
+
         private BlogModel FindById(int Id)
         {
             string query = "select * from tbl_blog where BlogId = @BlogId";
 
-            var lst = _adoDotNetService.Query<BlogModel>(query,
-                new AdoDotNetParameter("BlogId", Id));
+            var lst = _adoDotNetService.Query<BlogModel>(
+                query,
+                new AdoDotNetParameter("BlogId", Id)
+            );
 
             var item = lst.FirstOrDefault();
             return item;
