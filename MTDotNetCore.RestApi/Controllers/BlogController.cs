@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System.Reflection.Metadata;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MTDotNetCore.RestApi.Db;
 using MTDotNetCore.RestApi.Models;
-using System.Reflection.Metadata;
 
 namespace MTDotNetCore.RestApi.Controllers
 {
@@ -16,10 +16,17 @@ namespace MTDotNetCore.RestApi.Controllers
     {
         private readonly AppDbContext _context;
 
-        public BlogController()
+        // Replace with Dependency Injection configured at Program.cs
+
+        public BlogController(AppDbContext context)
         {
-            _context = new AppDbContext();
+            _context = context;
         }
+
+        //public BlogController()
+        //{
+        //    _context = new AppDbContext();
+        //}
 
         [HttpGet]
         public IActionResult Read()

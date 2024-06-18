@@ -1,21 +1,29 @@
-﻿using Microsoft.EntityFrameworkCore;
-using MTDotNetCore.RestApi.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using MTDotNetCore.RestApi.Models;
 
 namespace MTDotNetCore.RestApi.Db
 {
-    internal class AppDbContext : DbContext
+    public class AppDbContext : DbContext
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            //base.OnConfiguring(optionsBuilder);
+        // Replace with Dependency Injection configured at Program.cs
 
-            optionsBuilder.UseSqlServer(ConnectionStrings.sqlConnectionStringBuilder.ConnectionString);
-        }
+        public AppDbContext(DbContextOptions options)
+            : base(options) { }
+
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    //base.OnConfiguring(optionsBuilder);
+
+        //    optionsBuilder.UseSqlServer(
+        //        ConnectionStrings.sqlConnectionStringBuilder.ConnectionString
+        //    );
+        //}
+
         public DbSet<BlogModel> Blogs { get; set; }
     }
 }

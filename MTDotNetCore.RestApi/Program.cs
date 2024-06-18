@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+using MTDotNetCore.RestApi.Db;
 using MTDotNetCore.Shared;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,6 +20,14 @@ builder.Services.AddScoped(n => new AdoDotNetService(connectionString));
 
 //builder.Services.AddScoped<DapperService>(n=> new DapperService(connectionString));
 builder.Services.AddScoped(n => new DapperService(connectionString));
+
+builder.Services.AddDbContext<AppDbContext>(
+    options =>
+    {
+        options.UseSqlServer(connectionString);
+    },
+    ServiceLifetime.Transient
+);
 
 var app = builder.Build();
 
