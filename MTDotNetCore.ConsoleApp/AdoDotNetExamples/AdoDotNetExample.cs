@@ -1,28 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace MTDotNetCore.ConsoleApp.AdoDotNetExamples
 {
-    internal class AdoDotNetExample
+    public class AdoDotNetExample
     {
+        // Use Dependency Injection configured at Program.cs
 
-        private readonly SqlConnectionStringBuilder _sqlConnectionStringBuilder = new SqlConnectionStringBuilder()
+        //private readonly SqlConnectionStringBuilder _sqlConnectionStringBuilder =
+        //    new SqlConnectionStringBuilder()
+        //    {
+        //        DataSource = "MYOTHETPC\\MSSQLSERVER2012", // SQL Server Name
+        //        InitialCatalog = "DotNetTrainingBatch4", // database name
+        //        UserID = "sa",
+        //        Password = "admin123!"
+        //    };
+
+        private readonly SqlConnectionStringBuilder _sqlConnectionStringBuilder;
+
+        public AdoDotNetExample(SqlConnectionStringBuilder sqlConnectionStringBuilder)
         {
-            DataSource = "MYOTHETPC\\MSSQLSERVER2012", // SQL Server Name 
-            InitialCatalog = "DotNetTrainingBatch4",  // database name 
-            UserID = "sa",
-            Password = "admin123!"
-        };
+            _sqlConnectionStringBuilder = sqlConnectionStringBuilder;
+        }
 
         public void Read()
         {
-
-            SqlConnection connection = new SqlConnection(_sqlConnectionStringBuilder.ConnectionString);
+            SqlConnection connection = new SqlConnection(
+                _sqlConnectionStringBuilder.ConnectionString
+            );
             // SqlConnection connection = new SqlConnection("Data Source=SOLIDCAD-SERVER\\SQLEXPRESS2012;Initial Catalog=DotNetTrainingBatch4;User ID=sa;Password=admin123!");
             connection.Open();
             Console.WriteLine("Connection Open.");
@@ -37,7 +47,7 @@ namespace MTDotNetCore.ConsoleApp.AdoDotNetExamples
             connection.Close();
             Console.WriteLine("Connection Close.");
 
-            /* 
+            /*
              * DataSet => DataTable
              * DataTable => DataRow
              * DataRow => DataColumn
@@ -51,12 +61,13 @@ namespace MTDotNetCore.ConsoleApp.AdoDotNetExamples
                 Console.WriteLine("Blog Id => " + dr["BlogContent"]);
                 Console.WriteLine("--------------------------------");
             }
-
         }
 
         public void Edit(int id)
         {
-            SqlConnection connection = new SqlConnection(_sqlConnectionStringBuilder.ConnectionString);
+            SqlConnection connection = new SqlConnection(
+                _sqlConnectionStringBuilder.ConnectionString
+            );
             connection.Open();
             Console.WriteLine("Connection Open.");
 
@@ -85,16 +96,18 @@ namespace MTDotNetCore.ConsoleApp.AdoDotNetExamples
             Console.WriteLine("Blog Id => " + dr["BlogAuthor"]);
             Console.WriteLine("Blog Id => " + dr["BlogContent"]);
             Console.WriteLine("--------------------------------");
-
         }
 
         public void Create(string title, string author, string content)
         {
-            SqlConnection connection = new SqlConnection(_sqlConnectionStringBuilder.ConnectionString);
+            SqlConnection connection = new SqlConnection(
+                _sqlConnectionStringBuilder.ConnectionString
+            );
             connection.Open();
             Console.WriteLine("Connection Open.");
 
-            string query = @"INSERT INTO [dbo].[Tbl_Blog]
+            string query =
+                @"INSERT INTO [dbo].[Tbl_Blog]
            ([BlogTitle]
            ,[BlogAuthor]
            ,[BlogContent])
@@ -115,16 +128,18 @@ namespace MTDotNetCore.ConsoleApp.AdoDotNetExamples
 
             connection.Close();
             Console.WriteLine("Connection Close.");
-
         }
 
         public void Update(int BlogId, string blogTitle, string blogAuthor, string blogContent)
         {
-            SqlConnection connection = new SqlConnection(_sqlConnectionStringBuilder.ConnectionString);
+            SqlConnection connection = new SqlConnection(
+                _sqlConnectionStringBuilder.ConnectionString
+            );
             connection.Open();
             Console.WriteLine("Connection Open.");
 
-            string query = @"UPDATE [dbo].[Tbl_Blog]
+            string query =
+                @"UPDATE [dbo].[Tbl_Blog]
                             SET [BlogTitle] = @BlogTitle
                             ,[BlogAuthor] = @BlogAuthor
                             ,[BlogContent] = @BlogContent
@@ -143,12 +158,13 @@ namespace MTDotNetCore.ConsoleApp.AdoDotNetExamples
 
             connection.Close();
             Console.WriteLine("Connection Close.");
-
         }
 
         public void Delete(int BlogId)
         {
-            SqlConnection connection = new SqlConnection(_sqlConnectionStringBuilder.ConnectionString);
+            SqlConnection connection = new SqlConnection(
+                _sqlConnectionStringBuilder.ConnectionString
+            );
             connection.Open();
             Console.WriteLine("Connection Open.");
 
@@ -164,9 +180,6 @@ namespace MTDotNetCore.ConsoleApp.AdoDotNetExamples
 
             connection.Close();
             Console.WriteLine("Connection Close.");
-
         }
-
-
     }
 }
