@@ -152,20 +152,38 @@ function editBlog(id) {
 }
 
 function deleteButtonClick(id) {
-    Notiflix.Confirm.show(
-        'Confirm',
-        "Are you sure want to delete",
-        'Yes',
-        'No',
-        function okCb() {
-            deleteBlog(id);
-            successMessage("Deleting Successful.");
-            getBlogTable();
-        },
-        function cancelCb() {
-            return;
-        },
-        {
-        },
-    );
+    Swal.fire({
+        title: "Confirm",
+        text: "Are you sure want to delete?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes"
+    }).then((result) => {
+        if (!result.isConfirmed) return;
+
+        deleteBlog(id);
+        successMessage("Deleting Successful");
+        getBlogTable();
+    });
+
+    // Notiflix.Confirm.show(
+    //     'Confirm',
+    //     "Are you sure want to delete",
+    //     'Yes',
+    //     'No',
+    //     function okCb() {
+    //         deleteBlog(id);
+    //         successMessage("Deleting Successful.");
+    //         getBlogTable();
+    //     },
+    //     function cancelCb() {
+    //         return;
+    //     },
+    //     {
+    //     },
+    // );
+
+
 }

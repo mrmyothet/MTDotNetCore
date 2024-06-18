@@ -19,22 +19,3 @@ function errorMessage(message) {
         icon: "error"
     });
 }
-
-function confirmMessage(message) {
-    let confirmResult = false;
-    Notiflix.Confirm.show(
-        'Confirm',
-        message,
-        'Yes',
-        'No',
-        function okCb() {
-            confirmResult = true;
-        },
-        function cancelCb() {
-            confirmResult = false;
-        },
-        {
-        },
-    );
-    return confirmResult;
-}
