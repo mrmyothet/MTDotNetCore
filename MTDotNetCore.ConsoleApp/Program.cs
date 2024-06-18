@@ -1,7 +1,11 @@
-﻿using MTDotNetCore.ConsoleApp;
-using MTDotNetCore.ConsoleApp.AdoDotNetExamples;
-using System.Data;
+﻿using System.Data;
 using System.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using MTDotNetCore.ConsoleApp;
+using MTDotNetCore.ConsoleApp.AdoDotNetExamples;
+using MTDotNetCore.ConsoleApp.EFCoreExamples;
+using MTDotNetCore.ConsoleApp.Services;
 
 //Console.WriteLine("Hello, World!");
 
@@ -19,7 +23,21 @@ using System.Data.SqlClient;
 //EFCoreExample eFCoreExample = new EFCoreExample();
 //eFCoreExample.Run();
 
-AdoDotNetExample adoDotNetExample = new AdoDotNetExample();
-adoDotNetExample.Create("new Title", "new Author", "new Content");
+//AdoDotNetExample adoDotNetExample = new AdoDotNetExample();
+//adoDotNetExample.Create("new Title", "new Author", "new Content");
+
+var connectionString = ConnectionStrings.sqlConnectionStringBuilder.ConnectionString;
+
+var services = new ServiceCollection()
+    .AddDbContext<AppDbContext>(options =>
+    {
+        options.UseSqlServer(connectionString);
+    })
+    .BuildServiceProvider();
+
+var db = services.GetRequiredService<AppDbContext>();
+
+EFCoreExample eFCoreExample = new EFCoreExample(db);
+eFCoreExample.Run();
 
 Console.ReadLine();
