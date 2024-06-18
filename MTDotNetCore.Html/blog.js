@@ -10,6 +10,28 @@ getBlogTable();
 // updateBlog("800343db-584d-4a43-90bb-4ce39cbdb95d", "title", "author", "content");
 // deleteBlog("7cdeb770-5e83-4b56-b00e-0391ecd544d5");
 
+testPromise("Success");
+
+function testPromise(message) {
+    let myPromise = new Promise(function (success, error) {
+        // "Producing Code" (May take some time)
+        let result = confirm("Are you sure want to delete");
+
+        if (result) success();  // when successful
+        else error();   // when error
+    });
+
+    // "Consuming Code" (Must wait for a fulfilled Promise)
+    myPromise.then(
+        function (value) {
+            successMessage(message)
+        },
+        function (error) {
+            errorMessage(message);
+        }
+    );
+}
+
 
 function readBlog() {
     let lst = getBlogs();
