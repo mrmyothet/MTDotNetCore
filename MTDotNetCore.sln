@@ -30,13 +30,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MTDotNetCore.ConsoleAppRefi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MTDotNetCore.WinFormsApp", "MTDotNetCore.WinFormsApp\MTDotNetCore.WinFormsApp.csproj", "{6F711C3A-F01E-4697-B5F3-150C55A12E6C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MTDotNetCore.WinFormsAppSqlnjection", "MTDotNetCore.WinFormsAppSqlnjection\MTDotNetCore.WinFormsAppSqlnjection.csproj", "{7AB303C7-5F4B-481C-9A74-9A637A0C9D96}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MTDotNetCore.WinFormsAppSqlnjection", "MTDotNetCore.WinFormsAppSqlnjection\MTDotNetCore.WinFormsAppSqlnjection.csproj", "{7AB303C7-5F4B-481C-9A74-9A637A0C9D96}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MTDotNetCore.NLayer.UI", "MTDotNetCore.NLayer.UI\MTDotNetCore.NLayer.UI.csproj", "{2B7796F9-45C8-4B1E-8A3E-501E81439785}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MTDotNetCore.NLayer.UI", "MTDotNetCore.NLayer.UI\MTDotNetCore.NLayer.UI.csproj", "{2B7796F9-45C8-4B1E-8A3E-501E81439785}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MTDotNetCore.NLayer.BusinessLogic", "MTDotNetCore.NLayer.BusinessLogic\MTDotNetCore.NLayer.BusinessLogic.csproj", "{4E6F0033-946A-4E79-98BA-1824CBDEC6C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MTDotNetCore.NLayer.BusinessLogic", "MTDotNetCore.NLayer.BusinessLogic\MTDotNetCore.NLayer.BusinessLogic.csproj", "{4E6F0033-946A-4E79-98BA-1824CBDEC6C2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MTDotNetCore.NLayer.DataAccess", "MTDotNetCore.NLayer.DataAccess\MTDotNetCore.NLayer.DataAccess.csproj", "{B6D1F430-7DD5-4CF8-A14C-BF0BE11430DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MTDotNetCore.NLayer.DataAccess", "MTDotNetCore.NLayer.DataAccess\MTDotNetCore.NLayer.DataAccess.csproj", "{B6D1F430-7DD5-4CF8-A14C-BF0BE11430DD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MTDotNetCore.MinimalApi", "MTDotNetCore.MinimalApi\MTDotNetCore.MinimalApi.csproj", "{2BCB2BD7-7D62-4069-976D-D7936C06705F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -100,6 +102,10 @@ Global
 		{B6D1F430-7DD5-4CF8-A14C-BF0BE11430DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B6D1F430-7DD5-4CF8-A14C-BF0BE11430DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B6D1F430-7DD5-4CF8-A14C-BF0BE11430DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2BCB2BD7-7D62-4069-976D-D7936C06705F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BCB2BD7-7D62-4069-976D-D7936C06705F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BCB2BD7-7D62-4069-976D-D7936C06705F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BCB2BD7-7D62-4069-976D-D7936C06705F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
