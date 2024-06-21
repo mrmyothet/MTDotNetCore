@@ -1,8 +1,20 @@
+using Microsoft.EntityFrameworkCore;
+using MTDotNetCore.MVCApp.Db;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+string connectionString = builder.Configuration.GetConnectionString("DbConnection")!;
+builder.Services.AddDbContext<AppDbContext>(
+    options =>
+    {
+        options.UseSqlServer(connectionString);
+    },
+    ServiceLifetime.Transient,
+    ServiceLifetime.Transient
+);
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -20,8 +32,6 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
