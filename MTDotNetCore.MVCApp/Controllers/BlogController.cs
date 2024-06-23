@@ -16,7 +16,12 @@ namespace MTDotNetCore.MVCApp.Controllers
 
         public async Task<IActionResult> Index()
         {
-            List<BlogModel> lst = await _db.Blogs.OrderByDescending(x => x.BlogId).ToListAsync();
+            // select * from Tbl_Blog with (nolock)
+
+            List<BlogModel> lst = await _db.Blogs
+                .AsNoTracking()
+                .OrderByDescending(x => x.BlogId).ToListAsync();
+
             return View(lst);
         }
 
@@ -44,7 +49,10 @@ namespace MTDotNetCore.MVCApp.Controllers
         [ActionName("Edit")]
         public async Task<IActionResult> BlogEdit(int id)
         {
-            var item = await _db.Blogs.FirstOrDefaultAsync(x=> x.BlogId == id);
+            var item = await _db.Blogs
+                .AsNoTracking()
+                .FirstOrDefaultAsync(x=> x.BlogId == id);
+
             if (item is null)
             {
                 return Redirect("/Blog");
@@ -57,7 +65,9 @@ namespace MTDotNetCore.MVCApp.Controllers
         [ActionName("Update")]
         public async Task<IActionResult> BlogUpdate(int id, BlogModel blog)
         {
-            var item = await _db.Blogs.FirstOrDefaultAsync(x=> x.BlogId == id);
+            var item = await _db.Blogs
+                .AsNoTracking()
+                .FirstOrDefaultAsync(x=> x.BlogId == id);
             if (item is null)
             {
                 return Redirect("/Blog");
@@ -67,6 +77,8 @@ namespace MTDotNetCore.MVCApp.Controllers
             item.BlogAuthor = blog.BlogAuthor;
             item.BlogContent = blog.BlogContent;
 
+            _db.Entry(item).State = EntityState.Modified;
+
             await _db.SaveChangesAsync();
 
             return Redirect("/Blog");
@@ -75,7 +87,9 @@ namespace MTDotNetCore.MVCApp.Controllers
         [ActionName("Delete")]
         public async Task<IActionResult> BlogDelete(int id)
         {
-            var item = await _db.Blogs.FirstOrDefaultAsync(x=> x.BlogId == id);
+            var item = await _db.Blogs
+                .AsNoTracking()
+                .FirstOrDefaultAsync(x=> x.BlogId == id);
             if (item is null)
             {
                 return Redirect("/Blog");
