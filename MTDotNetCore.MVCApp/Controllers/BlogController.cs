@@ -39,5 +39,52 @@ namespace MTDotNetCore.MVCApp.Controllers
 
             return View("BlogCreate");
         }
+
+        [HttpGet]
+        [ActionName("Edit")]
+        public async Task<IActionResult> BlogEdit(int id)
+        {
+            var item = await _db.Blogs.FirstOrDefaultAsync(x=> x.BlogId == id);
+            if (item is null)
+            {
+                return Redirect("/Blog");
+            }
+
+            return View("BlogEdit", item);
+        }
+
+        [HttpPost]
+        [ActionName("Update")]
+        public async Task<IActionResult> BlogUpdate(int id, BlogModel blog)
+        {
+            var item = await _db.Blogs.FirstOrDefaultAsync(x=> x.BlogId == id);
+            if (item is null)
+            {
+                return Redirect("/Blog");
+            }
+
+            item.BlogTitle = blog.BlogTitle;
+            item.BlogAuthor = blog.BlogAuthor;
+            item.BlogContent = blog.BlogContent;
+
+            await _db.SaveChangesAsync();
+
+            return Redirect("/Blog");
+        }
+
+        [ActionName("Delete")]
+        public async Task<IActionResult> BlogDelete(int id)
+        {
+            var item = await _db.Blogs.FirstOrDefaultAsync(x=> x.BlogId == id);
+            if (item is null)
+            {
+                return Redirect("/Blog");
+            }
+
+            _db.Blogs.Remove(item);
+            await _db.SaveChangesAsync();
+
+            return Redirect("/Blog");
+        }
     }
 }
