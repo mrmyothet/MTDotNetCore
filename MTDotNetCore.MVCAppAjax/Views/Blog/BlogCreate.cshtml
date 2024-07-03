@@ -1,0 +1,92 @@
+﻿<h2>New Blog</h2>
+
+<div class="mb-3">
+    <label class="form-label">Title</label>
+    <input type="text" class="form-control" id="BlogTitle" name="BlogTitle">
+</div>
+<div class="mb-3">
+    <label class="form-label">Author</label>
+    <input type="text" class="form-control" id="BlogAuthor" name="BlogAuthor">
+</div>
+<div class="mb-3">
+    <label class="form-label">Content</label>
+    <textarea class="form-control" rows="3" id="BlogContent" name="BlogContent"></textarea>
+</div>
+
+<a href="/Blog" class="btn btn-dark">Back</a>
+<button type="button" id="btnSave" class="btn btn-success">Save</button>
+
+@section scripts{
+    <script>
+        $('#btnSave').click(function () { 
+        
+            const title = $('#BlogTitle').val();
+            const author = $('#BlogAuthor').val();
+            const content = $('#BlogContent').val();
+
+            const _requestModel = {
+                BlogTitle: title,
+                BlogAuthor: author,
+                BlogContent: content
+            };
+
+            $.ajax({
+                type: 'POST',
+                url: '/Blog/Save',
+                data: { blog: _requestModel },
+                dataType: "JSON",
+                success: function (result) {
+                    // console.log(result);
+
+                    const message = result.Message;
+                    if (!result.IsSuccess) { 
+                        alert(message);
+                        return;
+                    }
+
+                    alert(message);
+                    location.href = "/Blog/Index";
+                },
+                error: function (xhr, status, error) {
+                    console.log({xhr, status, error});
+                }
+            });
+        });
+
+
+        // function InsertDATA() {
+        //     var _data = {
+        //         "Val1": $('#v1').val(),
+        //         "Val2": $('#v2').val(),
+        //         "Val3": $('#v3').val(),
+        //         "Val4": $('#v4').val(),
+        //         "Val5": $('#v5').val(),
+        //         "Val6": $('#v6').val(),
+        //     };
+        //     $.ajax({
+        //         type: 'POST',
+        //         url: 'DataInsertion/Insert_data',
+        //         data: JSON.stringify(_data),
+        //         contentType: 'application/json',
+        //         dataType: "JSON",
+        //         success: function (r) {
+        //             console.log("RESULT", r);
+        //         },
+        //         error: function (xhr, status, error) {
+        //             var err = eval("(" + xhr.responseText + ")");
+        //             alert(err.Message);
+        //         }
+        //     });
+        // }
+
+        
+    </script>
+}
+
+@section css{
+<style>
+    /* body{
+    background-color: lightgreen;
+    } */
+</style>
+}
