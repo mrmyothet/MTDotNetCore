@@ -1,0 +1,42 @@
+﻿@model ColumnMarkersModel
+
+<div id="chart" style="min-height: 365px"></div>
+
+@section scripts
+{
+    <script>
+
+        var options = {
+            series: [
+                {
+                    name: @Model.Name,
+                    data: @Html.Raw(JsonConvert.SerializeObject(Model.Data)),
+            chart: {
+                height: 350,
+                type: 'bar'
+            },
+            plotOptions: {
+                bar: {
+                    columnWidth: '60%'
+                }
+            },
+            colors: ['#00E396'],
+            dataLabels: {
+                enabled: false
+            },
+            legend: {
+                show: true,
+                showForSingleSeries: true,
+                customLegendItems: ['Actual', 'Expected'],
+                markers: {
+                    fillColors: ['#00E396', '#775DD0']
+                }
+            }
+        };
+
+        var chart = new ApexCharts(document.querySelector("#chart"), options);
+        chart.render();
+
+
+    </script>
+}
