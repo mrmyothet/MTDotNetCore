@@ -42,7 +42,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MTDotNetCore.MinimalApi", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MTDotNetCore.MVCApp", "MTDotNetCore.MVCApp\MTDotNetCore.MVCApp.csproj", "{44C98F61-A4E2-4947-9125-53BA58891E2F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MTDotNetCore.MVCAppAjax", "MTDotNetCore.MVCAppAjax\MTDotNetCore.MVCAppAjax.csproj", "{59FB750C-206F-46E5-B53B-FBE676AC4334}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MTDotNetCore.MVCAppAjax", "MTDotNetCore.MVCAppAjax\MTDotNetCore.MVCAppAjax.csproj", "{59FB750C-206F-46E5-B53B-FBE676AC4334}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MTDotNetCore.MvcChartApp", "MTDotNetCore.MvcChartApp\MTDotNetCore.MvcChartApp.csproj", "{50625C54-581C-4092-99BD-5515D0FCCEB4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -118,6 +120,10 @@ Global
 		{59FB750C-206F-46E5-B53B-FBE676AC4334}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{59FB750C-206F-46E5-B53B-FBE676AC4334}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{59FB750C-206F-46E5-B53B-FBE676AC4334}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50625C54-581C-4092-99BD-5515D0FCCEB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50625C54-581C-4092-99BD-5515D0FCCEB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50625C54-581C-4092-99BD-5515D0FCCEB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50625C54-581C-4092-99BD-5515D0FCCEB4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
