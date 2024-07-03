@@ -77,23 +77,36 @@ public class BlogController : Controller
 
         _db.Entry(item).State = EntityState.Modified;
 
-        await _db.SaveChangesAsync();
+        var result = await _db.SaveChangesAsync();
 
-        return Redirect("/Blog");
+        var message = new MessageModel()
+        {
+            IsSuccess = result > 0,
+            Message = result > 0 ? "Updating Successful." : "Updating Failed.",
+        };
+
+        return Json(message);
     }
 
+    [HttpPost]
     [ActionName("Delete")]
-    public async Task<IActionResult> BlogDelete(int id)
+    public async Task<IActionResult> BlogDelete(BlogModel blog)
     {
-        var item = await _db.Blogs.AsNoTracking().FirstOrDefaultAsync(x => x.BlogId == id);
+        var item = await _db.Blogs.AsNoTracking().FirstOrDefaultAsync(x => x.BlogId == blog.BlogId);
         if (item is null)
         {
             return Redirect("/Blog");
         }
 
         _db.Blogs.Remove(item);
-        await _db.SaveChangesAsync();
+        var result = await _db.SaveChangesAsync();
 
-        return Redirect("/Blog");
+        var message = new MessageModel()
+        {
+            IsSuccess = result > 0,
+            Message = result > 0 ? "Deleting Successful." : "Deleting Failed.",
+        };
+
+        return Json(message);
     }
 }
