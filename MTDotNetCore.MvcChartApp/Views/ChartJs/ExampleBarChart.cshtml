@@ -1,0 +1,33 @@
+﻿@model MTDotNetCore.MvcChartApp.Models.ChartJs.ExampleBarChartModel
+
+<div>
+    <canvas id="myChart"></canvas>
+</div>
+
+@section scripts
+{
+    <script>
+        const ctx = document.getElementById('myChart');
+        const Labels = @Html.Raw(JsonConvert.SerializeObject(Model.LabelList));
+        const Data = @Html.Raw(JsonConvert.SerializeObject(Model.Data));
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: Labels,
+                datasets: [{
+                    label: '# of votes',
+                    data: Data,
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+}
