@@ -7,11 +7,12 @@ public class ChartJsController : Controller
 {
     public IActionResult ExampleBarChart()
     {
-        ExampleBarChartModel model = new ExampleBarChartModel();
-        model.Title = "No of Votes";
-        model.LabelList = new List<string> { "Red", "Blue", "Yellow", "Green", "Purple", "Orange" };
-
-        model.Data = new List<int> { 12, 19, 3, 5, 2, 3 };
+        ExampleBarChartModel model = new ExampleBarChartModel
+        {
+            Label = "No of Votes",
+            LabelList = new List<string> { "Red", "Blue", "Yellow", "Green", "Purple", "Orange" },
+            Data = new List<int> { 12, 19, 3, 5, 2, 3 }
+        };
 
         return View(model);
     }

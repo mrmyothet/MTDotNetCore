@@ -13,15 +13,17 @@
 {
     <script>
         const ctx = document.getElementById('myChart');
-        const Labels = @Html.Raw(JsonConvert.SerializeObject(Model.LabelList));
+
+        const Label = @Html.Raw(JsonConvert.SerializeObject(Model.Label));
+        const LabelList = @Html.Raw(JsonConvert.SerializeObject(Model.LabelList));
         const Data = @Html.Raw(JsonConvert.SerializeObject(Model.Data));
 
         new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: Labels,
+                labels: LabelList,
                 datasets: [{
-                    label: '# of votes',
+                    label: Label,
                     data: Data,
                     borderWidth: 1
                 }]
