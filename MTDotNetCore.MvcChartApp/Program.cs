@@ -1,4 +1,5 @@
 using Serilog;
+using Serilog.Sinks.MSSqlServer;
 
 string filePath = Path.Combine(
     AppDomain.CurrentDomain.BaseDirectory,
@@ -8,6 +9,14 @@ string filePath = Path.Combine(
 Log.Logger = new LoggerConfiguration()
     .WriteTo.Console()
     .WriteTo.File(filePath, rollingInterval: RollingInterval.Hour)
+    .WriteTo.MSSqlServer(
+        connectionString: "Server=MYOTHETPC\\MSSQLSERVER2012; Database=DotNetTrainingBatch4; User Id=sa; Password=admin123!;TrustServerCertificate=True;",
+        sinkOptions: new MSSqlServerSinkOptions
+        {
+            TableName = "Tbl_LogEvents",
+            AutoCreateSqlTable = true
+        }
+    )
     .CreateLogger();
 
 try
