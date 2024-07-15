@@ -1,4 +1,6 @@
-﻿<h3>
+﻿@model MTDotNetCore.MvcChartApp.Models.ChartJs.InterpolationLineChartModel
+
+<h3>
     <a href="https://www.chartjs.org/docs/latest/samples/line/interpolation.html">
         Chart.js Line Chart - Cubic interpolation mode
     </a>
@@ -28,29 +30,33 @@
         for (let i = 0; i < DATA_COUNT; ++i) {
             labels.push(i.toString());
         }
-        const datapoints = [0, 20, 20, 60, 60, 120, NaN, 180, 120, 125, 105, 110, 170];
+
+        const dataPoints = @Html.Raw(JsonConvert.SerializeObject(Model.DataPoints));
+
         const data = {
             labels: labels,
             datasets: [
                 {
-                    label: 'Cubic interpolation (monotone)',
-                    data: datapoints,
+                    label: @Html.Raw(JsonConvert.SerializeObject(Model.Label)),
+                    data: dataPoints,
                     borderColor: CHART_COLORS.red,
                     fill: false,
                     cubicInterpolationMode: 'monotone',
                     tension: 0.4
-                }, {
-                    label: 'Cubic interpolation',
-                    data: datapoints,
-                    borderColor: CHART_COLORS.blue,
-                    fill: false,
-                    tension: 0.4
-                }, {
-                    label: 'Linear interpolation (default)',
-                    data: datapoints,
-                    borderColor: CHART_COLORS.green,
-                    fill: false
-                }
+                }, 
+                // {
+                //     label: 'Cubic interpolation',
+                //     data: dataPoints,
+                //     borderColor: CHART_COLORS.blue,
+                //     fill: false,
+                //     tension: 0.4
+                // }, 
+                // {
+                //     label: 'Linear interpolation (default)',
+                //     data: dataPoints,
+                //     borderColor: CHART_COLORS.green,
+                //     fill: false
+                // }
             ]
         };
 
@@ -63,7 +69,7 @@
                 plugins: {
                     title: {
                         display: true,
-                        text: 'Chart.js Line Chart - Cubic interpolation mode'
+                        text: @Html.Raw(JsonConvert.SerializeObject(Model.Title))
                     },
                 },
                 interaction: {

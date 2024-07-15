@@ -9,8 +9,11 @@
 </div>
 
 @section scripts{
+    <script src="~/js/chartJs.js"></script>
     <script>
         // Utils
+        var _seed = Date.now();
+
         function numbers(config) {
             var cfg = config || {};
             var min = valueOrDefault(cfg.min, 0);
@@ -33,6 +36,13 @@
             }
 
             return data;
+        }
+
+        function rand(min, max) {
+            min = valueOrDefault(min, 0);
+            max = valueOrDefault(max, 0);
+            _seed = (_seed * 9301 + 49297) % 233280;
+            return min + (_seed / 233280) * (max - min);
         }
 
         const MONTHS = [
@@ -94,10 +104,10 @@
         ];
 
         // Setup
-        const DATA_COUNT = 7;
+        const DATA_COUNT = 12;
         const NUMBER_CFG = { count: DATA_COUNT, min: -100, max: 100 };
 
-        const labels = months({ count: 7 });
+        const labels = months({ count: 12 });
         const data = {
             labels: labels,
             datasets: [
@@ -139,5 +149,8 @@
                 }
             },
         };
+
+        const ctx = document.getElementById('myChart');
+        new Chart(ctx, config);
     </script>
 }

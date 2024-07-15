@@ -24,6 +24,13 @@ public class ChartJsController : Controller
 
     public IActionResult InterpolationLineChart()
     {
-        return View();
+        InterpolationLineChartModel model = new InterpolationLineChartModel()
+        {
+            Title = "Chart.js Line Chart - Cubic interpolation mode",
+            Label = "Cubic interpolation (monotone)",
+            DataPoints = new List<int> { 0, 20, 20, 60, 60, 120, 180, 120, 125, 105, 110, 170 }
+        };
+
+        return View(model);
     }
 }
