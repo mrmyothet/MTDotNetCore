@@ -1,4 +1,6 @@
-﻿<h3>
+﻿@model MTDotNetCore.MvcChartApp.Models.CanvasJs.LineChartModel;
+
+<h3>
 	<a href="https://canvasjs.com/html5-javascript-line-chart/">
 		Canvas JS - Line Chart
 	</a>
@@ -19,20 +21,7 @@
 				data: [{
 					type: "line",
 					indexLabelFontSize: 16,
-					dataPoints: [
-						{ y: 450 },
-						{ y: 414 },
-						{ y: 520, indexLabel: "\u2191 highest", markerColor: "red", markerType: "triangle" },
-						{ y: 460 },
-						{ y: 450 },
-						{ y: 500 },
-						{ y: 480 },
-						{ y: 480 },
-						{ y: 410, indexLabel: "\u2193 lowest", markerColor: "DarkSlateGrey", markerType: "cross" },
-						{ y: 500 },
-						{ y: 480 },
-						{ y: 510 }
-					]
+					dataPoints: @Html.Raw(JsonConvert.SerializeObject(Model.DataList))
 				}]
 			});
 			chart.render();
