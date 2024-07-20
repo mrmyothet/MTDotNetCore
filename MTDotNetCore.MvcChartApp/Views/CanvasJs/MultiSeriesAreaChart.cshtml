@@ -1,8 +1,14 @@
-﻿<div id="chartContainer" style="height: 370px; width: 100%;"></div>
+﻿@{
+	var jsonReceived = ViewBag.receivedJson;
+}
+
+<div id="chartContainer" style="height: 370px; width: 100%;"></div>
 
 @section scripts
 {
 	<script>
+		var ReceivedDataPoints = @Html.Raw(jsonReceived);
+
 		window.onload = function () {
 
 			var chart = new CanvasJS.Chart("chartContainer", {
@@ -33,15 +39,11 @@
 					type: "area",
 					color: "rgba(40,175,101,0.6)",
 					markerSize: 0,
-					dataPoints: [
-						{ x: new Date(2017, 1, 6), y: 220 },
-						{ x: new Date(2017, 1, 7), y: 120 },
-						{ x: new Date(2017, 1, 8), y: 144 },
-						{ x: new Date(2017, 1, 9), y: 162 },
-						{ x: new Date(2017, 1, 10), y: 129 },
-						{ x: new Date(2017, 1, 11), y: 109 },
-						{ x: new Date(2017, 1, 12), y: 129 }
-					]
+					dataPoints: ReceivedDataPoints
+					.map(dp => ({
+						x: new Date(dp.x),
+						y: dp.y,
+					}))
 				},
 				{
 					name: "Sent",
