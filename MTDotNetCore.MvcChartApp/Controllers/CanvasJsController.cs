@@ -55,9 +55,6 @@ public class CanvasJsController : Controller
 
     public IActionResult MultiSeriesAreaChart()
     {
-        MultiSeriesAreaChartModel model = new MultiSeriesAreaChartModel();
-        model.SerieAreaList = new List<SerieArea>();
-
         SerieArea Received = new SerieArea()
         {
             name = "Received",
@@ -98,9 +95,6 @@ public class CanvasJsController : Controller
             }
         };
 
-        model.SerieAreaList.Add(Received);
-        model.SerieAreaList.Add(Sent);
-
         var settings = new JsonSerializerSettings
         {
             Converters = new List<JsonConverter> { new CustomDateTimeConverter() }
@@ -108,6 +102,9 @@ public class CanvasJsController : Controller
 
         var jsonReceived = JsonConvert.SerializeObject(Received.dataPoints, settings);
         ViewBag.jsonReceived = jsonReceived;
+
+        var jsonSent = JsonConvert.SerializeObject(Sent.dataPoints, settings);
+        ViewBag.jsonSent = jsonSent;
 
         return View();
     }
