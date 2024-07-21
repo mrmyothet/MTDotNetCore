@@ -111,7 +111,28 @@ public class CanvasJsController : Controller
 
     public IActionResult ColumnChart()
     {
-        return View();
+        ColumnChartModel model = new ColumnChartModel();
+        model.Reserves = new List<ColumnChartDatapoint>()
+        {
+            new ColumnChartDatapoint() { label = "Saudi", y = 266.21f },
+            new ColumnChartDatapoint() { label = "Venezuela", y = 302.25f },
+            new ColumnChartDatapoint() { label = "Iran", y = 157.20f },
+            new ColumnChartDatapoint() { label = "Iraq", y = 148.77f },
+            new ColumnChartDatapoint() { label = "Kuwait", y = 101.50f },
+            new ColumnChartDatapoint() { label = "UAE", y = 97.8f }
+        };
+
+        model.Production = new List<ColumnChartDatapoint>()
+        {
+            new ColumnChartDatapoint() { label = "Saudi", y = 10.46f },
+            new ColumnChartDatapoint() { label = "Venezuela", y = 2.27f },
+            new ColumnChartDatapoint() { label = "Iran", y = 3.99f },
+            new ColumnChartDatapoint() { label = "Iraq", y = 4.45f },
+            new ColumnChartDatapoint() { label = "Kuwait", y = 2.92f },
+            new ColumnChartDatapoint() { label = "UAE", y = 3.1f }
+        };
+
+        return View(model);
     }
 }
 
