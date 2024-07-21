@@ -108,6 +108,11 @@ public class CanvasJsController : Controller
 
         return View();
     }
+
+    public IActionResult ColumnChart()
+    {
+        return View();
+    }
 }
 
 public class CustomDateTimeConverter : IsoDateTimeConverter
