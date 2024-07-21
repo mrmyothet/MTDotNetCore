@@ -20,7 +20,7 @@ namespace MTDotNetCore.MvcChartApp.Models.CanvasJs
 
     public class Datapoint
     {
-        public DateTime x { get; set; }
-        public int y { get; set; }
+        public DateTime date { get; set; }
+        public int value { get; set; }
     }
 }

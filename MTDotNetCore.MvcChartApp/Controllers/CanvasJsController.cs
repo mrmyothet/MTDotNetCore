@@ -68,13 +68,13 @@ public class CanvasJsController : Controller
             markerSize = 0,
             dataPoints = new List<Datapoint>()
             {
-                new Datapoint() { x = new DateTime(2017, 1, 16), y = 220 },
-                new Datapoint() { x = new DateTime(2017, 1, 7), y = 120 },
-                new Datapoint() { x = new DateTime(2017, 1, 8), y = 144 },
-                new Datapoint() { x = new DateTime(2017, 1, 9), y = 162 },
-                new Datapoint() { x = new DateTime(2017, 1, 10), y = 129 },
-                new Datapoint() { x = new DateTime(2017, 1, 11), y = 109 },
-                new Datapoint() { x = new DateTime(2017, 1, 12), y = 129 }
+                new Datapoint() { date = new DateTime(2017, 2, 6), value = 220 },
+                new Datapoint() { date = new DateTime(2017, 2, 7), value = 120 },
+                new Datapoint() { date = new DateTime(2017, 2, 8), value = 144 },
+                new Datapoint() { date = new DateTime(2017, 2, 9), value = 162 },
+                new Datapoint() { date = new DateTime(2017, 2, 10), value = 129 },
+                new Datapoint() { date = new DateTime(2017, 2, 11), value = 109 },
+                new Datapoint() { date = new DateTime(2017, 2, 12), value = 129 }
             }
         };
 
@@ -88,13 +88,13 @@ public class CanvasJsController : Controller
             markerSize = 0,
             dataPoints = new List<Datapoint>()
             {
-                new Datapoint() { x = new DateTime(2017, 1, 6), y = 42 },
-                new Datapoint() { x = new DateTime(2017, 1, 7), y = 34 },
-                new Datapoint() { x = new DateTime(2017, 1, 8), y = 29 },
-                new Datapoint() { x = new DateTime(2017, 1, 9), y = 42 },
-                new Datapoint() { x = new DateTime(2017, 1, 10), y = 53 },
-                new Datapoint() { x = new DateTime(2017, 1, 11), y = 15 },
-                new Datapoint() { x = new DateTime(2017, 1, 12), y = 12 }
+                new Datapoint() { date = new DateTime(2017, 2, 6), value = 42 },
+                new Datapoint() { date = new DateTime(2017, 2, 7), value = 34 },
+                new Datapoint() { date = new DateTime(2017, 2, 8), value = 29 },
+                new Datapoint() { date = new DateTime(2017, 2, 9), value = 42 },
+                new Datapoint() { date = new DateTime(2017, 2, 10), value = 53 },
+                new Datapoint() { date = new DateTime(2017, 2, 11), value = 15 },
+                new Datapoint() { date = new DateTime(2017, 2, 12), value = 12 }
             }
         };
 
@@ -106,8 +106,8 @@ public class CanvasJsController : Controller
             Converters = new List<JsonConverter> { new CustomDateTimeConverter() }
         };
 
-        var receivedJson = JsonConvert.SerializeObject(Received.dataPoints, settings);
-        ViewBag.receivedJson = receivedJson;
+        var jsonReceived = JsonConvert.SerializeObject(Received.dataPoints, settings);
+        ViewBag.jsonReceived = jsonReceived;
 
         return View();
     }
@@ -117,6 +117,6 @@ public class CustomDateTimeConverter : IsoDateTimeConverter
 {
     public CustomDateTimeConverter()
     {
-        DateTimeFormat = "yyyy, M, dd"; // Adjust month to be zero-based
+        DateTimeFormat = "yyyy, MM, dd"; // Adjust month to be zero-based
     }
 }
