@@ -127,5 +127,14 @@ namespace MTDotNetCore.ConsoleApp.EFCoreExamples
             string message = rowsAffected > 0 ? "Delete Successful" : "Delete Failed";
             Console.WriteLine(message);
         }
+
+        public void GenerateBlogData(int count)
+        {
+            for (int i = 0; i < count; i++)
+            {
+                int rowNo = i + 1;
+                Create("Title " + rowNo, "Author " + rowNo, "Content " + rowNo);
+            }
+        }
     }
 }
