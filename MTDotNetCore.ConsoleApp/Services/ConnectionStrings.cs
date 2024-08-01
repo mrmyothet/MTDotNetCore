@@ -9,14 +9,14 @@ namespace MTDotNetCore.ConsoleApp.Services
 {
     internal static class ConnectionStrings
     {
-        public static SqlConnectionStringBuilder sqlConnectionStringBuilder = new SqlConnectionStringBuilder()
-        {
-            DataSource = "MYOTHETPC\\MSSQLSERVER2012",
-            InitialCatalog = "DotNetTrainingBatch4",
-            UserID = "sa",
-            Password = "admin123!",
-            TrustServerCertificate = true
-        };
-
+        public static SqlConnectionStringBuilder sqlConnectionStringBuilder =
+            new SqlConnectionStringBuilder()
+            {
+                DataSource = "MYOTHETPC\\MSSQLSERVER2012",
+                InitialCatalog = "DotNetTrainingBatch3",
+                UserID = "sa",
+                Password = "admin123!",
+                TrustServerCertificate = true
+            };
     }
 }

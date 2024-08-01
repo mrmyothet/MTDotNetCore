@@ -41,12 +41,12 @@ var services = new ServiceCollection()
 
 var db = services.GetRequiredService<AppDbContext>();
 EFCoreExample eFCoreExample = new EFCoreExample(db);
-eFCoreExample.Run();
+eFCoreExample.GenerateBlogData(395);
 
-AdoDotNetExample adoDotNetExample = services.GetRequiredService<AdoDotNetExample>();
-adoDotNetExample.Create("new Title", "new Author", "new Content");
+//AdoDotNetExample adoDotNetExample = services.GetRequiredService<AdoDotNetExample>();
+//adoDotNetExample.Create("new Title", "new Author", "new Content");
 
-DapperExample dapperExample = services.GetRequiredService<DapperExample>();
-dapperExample.Run();
+//DapperExample dapperExample = services.GetRequiredService<DapperExample>();
+//dapperExample.Run();
 
 Console.ReadLine();
