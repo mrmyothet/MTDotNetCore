@@ -9,27 +9,60 @@ namespace MTDotNetCore.PaginationAPI.Controllers
     [ApiController]
     public class BlogController : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly AppDbContext _db;
 
         public BlogController(AppDbContext context)
         {
-            _context = context;
+            _db = context;
         }
 
         [HttpGet]
         public IActionResult GetBlogs()
         {
-            var lst = _context.Blogs.ToList();
+            var lst = _db.Blogs.ToList();
             return Ok(lst);
+        }
+
+        [HttpGet("{pageNo}/{pageSize}")]
+        [HttpGet("/pageNo/{pageNo}/pageSize/{pageSize}")]
+        public IActionResult GetBlogs(int pageNo, int pageSize)
+        {
+            int rowCount = _db.Blogs.Count();
+            int pageCount = rowCount / pageSize;
+            if (rowCount % pageSize > 0)
+            {
+                pageCount++;
+            }
+
+            if (pageNo > pageCount)
+            {
+                return BadRequest(new { Message = "Invalid Page No." });
+            }
+
+            var lst = _db
+                .Blogs.OrderByDescending(x => x.BlogId)
+                .Skip((pageNo - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+
+            BlogResponseModel responseModel = new BlogResponseModel()
+            {
+                Data = lst,
+                PageNo = pageNo,
+                PageSize = pageSize,
+                PageCount = pageCount,
+            };
+
+            return Ok(responseModel);
         }
 
         [HttpPost]
         public IActionResult CreateBlog(BlogModel model)
         {
-            var entry = _context.Blogs.Add(model);
+            var entry = _db.Blogs.Add(model);
             var createdBlog = entry.Entity;
 
-            int result = _context.SaveChanges();
+            int result = _db.SaveChanges();
 
             if (result <= 0)
                 return BadRequest();
@@ -43,7 +76,7 @@ namespace MTDotNetCore.PaginationAPI.Controllers
         [HttpGet("{id}")]
         public IActionResult GetBlog(int id)
         {
-            var item = _context.Blogs.FirstOrDefault(b => b.BlogId == id);
+            var item = _db.Blogs.FirstOrDefault(b => b.BlogId == id);
             return Ok(item);
         }
     }

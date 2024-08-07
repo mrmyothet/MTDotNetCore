@@ -6,20 +6,23 @@ using static System.Net.Mime.MediaTypeNames;
 HttpClient _httpClient = new HttpClient() { BaseAddress = new Uri("https://localhost:7254") };
 string blogEndPoint = "/api/blog";
 
-int NoOfRecords = 395;
-for (int i = 0; i < NoOfRecords; i++)
-{
-    int rowNo = i + 1;
-    BlogModel newBlog = new BlogModel()
-    {
-        blogTitle = "Sample Title " + rowNo,
-        blogAuthor = "Sample Author " + rowNo,
-        blogContent = "Sample Content " + rowNo
-    };
+// Generate multiple records for testing pagination
 
-    await CreateBlogPostAsync(_httpClient, newBlog);
-}
+//int NoOfRecords = 395;
+//for (int i = 0; i < NoOfRecords; i++)
+//{
+//    int rowNo = i + 1;
+//    BlogModel newBlog = new BlogModel()
+//    {
+//        blogTitle = "Sample Title " + rowNo,
+//        blogAuthor = "Sample Author " + rowNo,
+//        blogContent = "Sample Content " + rowNo
+//    };
 
+//    await CreateBlogPostAsync(_httpClient, newBlog);
+//}
+
+// Get Records from API
 var response = await _httpClient.GetAsync(blogEndPoint);
 
 if (!response.IsSuccessStatusCode)
@@ -28,11 +31,21 @@ if (!response.IsSuccessStatusCode)
 Console.WriteLine("Success Status Code");
 string jsonString = await response.Content.ReadAsStringAsync();
 
-if (!String.IsNullOrEmpty(jsonString))
-{
-    List<BlogModel> lst = JsonConvert.DeserializeObject<List<BlogModel>>(jsonString)!;
-    Console.WriteLine(lst.Count);
-}
+if (String.IsNullOrEmpty(jsonString))
+    return;
+
+List<BlogModel> lst = JsonConvert.DeserializeObject<List<BlogModel>>(jsonString)!;
+int rowCount = lst.Count;
+
+int pageSize = 10;
+int pageCount = rowCount / pageSize;
+
+if (rowCount % pageSize > 0)
+    pageCount++;
+
+Console.WriteLine($"Row Count: {rowCount}");
+Console.WriteLine($"Page Size : {pageSize}");
+Console.WriteLine($"Page Count : {pageCount}");
 
 Console.ReadLine();
 
