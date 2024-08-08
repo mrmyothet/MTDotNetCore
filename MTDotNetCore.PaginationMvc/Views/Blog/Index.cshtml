@@ -57,6 +57,19 @@
 </nav> *@
 <nav aria-label="...">
     <ul class="pagination">
+        @if (pageNo == 1)
+        {
+            <li class="page-item disabled">
+                <a class="page-link">Previous</a>
+            </li>
+        }
+        else
+        {
+            <li class="page-item">
+                <a class="page-link" href="@GetPageUrl(pageNo-1)">Previous</a>
+            </li>
+        }
+        
         @if (pageCount <= 9)
         {
             for (int i = 1; i <= pageCount; i++)
@@ -74,6 +87,77 @@
                     </li>
                 }
             }
+        }
+        else
+        {
+            if (pageNo <= 3 || pageNo >= pageCount-2)
+            {
+                for (int i = 1; i <= 4; i++)
+                {
+                    if (pageNo == i)
+                    {
+                        <li class="page-item active" aria-current="page">
+                            <a class="page-link" href="@GetPageUrl(i)">@i</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="page-item">
+                            <a class="page-link" href="@GetPageUrl(i)">@i</a>
+                        </li>
+                    }
+                }
+                <li class="page-item"><a class="page-link" href="#">...</a></li>
+                for (int i = pageCount-3; i <= pageCount; i++)
+                {
+                    if (pageNo == i)
+                    {
+                        <li class="page-item active" aria-current="page">
+                            <a class="page-link" href="@GetPageUrl(i)">@i</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="page-item">
+                            <a class="page-link" href="@GetPageUrl(i)">@i</a>
+                        </li>
+                    }
+                }
+            }
+            else
+            {
+                <li class="page-item"><a class="page-link" href="@GetPageUrl(1)">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">...</a></li>
+                for (int i = pageNo - 2; i <= pageNo + 2; i++)
+                {
+                    if (pageNo == i)
+                    {
+                        <li class="page-item active" aria-current="page">
+                            <a class="page-link" href="@GetPageUrl(i)">@i</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="page-item">
+                            <a class="page-link" href="@GetPageUrl(i)">@i</a>
+                        </li>
+                    }
+                }
+                <li class="page-item"><a class="page-link" href="#">...</a></li>
+                <li class="page-item"><a class="page-link" href="@GetPageUrl(pageCount)">@pageCount</a></li>
+            }
+        }
+        @if (pageNo == pageCount)
+        {
+            <li class="page-item disabled">
+                <a class="page-link">Next</a>
+            </li>
+        }
+        else
+        {
+            <li class="page-item ">
+                <a class="page-link" href="@GetPageUrl(pageNo + 1)">Next</a>
+            </li>
         }
     </ul>
 </nav>

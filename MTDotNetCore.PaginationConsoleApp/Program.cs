@@ -8,19 +8,19 @@ string blogEndPoint = "/api/blog";
 
 // Generate multiple records for testing pagination
 
-//int NoOfRecords = 395;
-//for (int i = 0; i < NoOfRecords; i++)
-//{
-//    int rowNo = i + 1;
-//    BlogModel newBlog = new BlogModel()
-//    {
-//        blogTitle = "Sample Title " + rowNo,
-//        blogAuthor = "Sample Author " + rowNo,
-//        blogContent = "Sample Content " + rowNo
-//    };
+int NoOfRecords = 391;
+for (int i = 0; i < NoOfRecords; i++)
+{
+    int rowNo = i + 1;
+    BlogModel newBlog = new BlogModel()
+    {
+        blogTitle = "Sample Title " + rowNo,
+        blogAuthor = "Sample Author " + rowNo,
+        blogContent = "Sample Content " + rowNo
+    };
 
-//    await CreateBlogPostAsync(_httpClient, newBlog);
-//}
+    await CreateBlogPostAsync(_httpClient, newBlog);
+}
 
 // Get Records from API
 var response = await _httpClient.GetAsync(blogEndPoint);
