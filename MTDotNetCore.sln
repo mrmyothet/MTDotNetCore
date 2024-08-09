@@ -54,7 +54,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MTDotNetCore.PaginationAPI"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MTDotNetCore.PaginationConsoleApp", "MTDotNetCore.PaginationConsoleApp\MTDotNetCore.PaginationConsoleApp.csproj", "{8134EF6E-06CF-42B0-AD95-9ABFFE1952D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MTDotNetCore.PaginationMvc", "MTDotNetCore.PaginationMvc\MTDotNetCore.PaginationMvc.csproj", "{A4EAE405-E0D2-49B4-8AC1-FA85210D03E2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MTDotNetCore.PaginationMvc", "MTDotNetCore.PaginationMvc\MTDotNetCore.PaginationMvc.csproj", "{A4EAE405-E0D2-49B4-8AC1-FA85210D03E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MTDotNetCore.RealtimeChartApp", "MTDotNetCore.RealtimeChartApp\MTDotNetCore.RealtimeChartApp.csproj", "{FCDDC526-20A9-4AA5-A740-561A5A8EC9A5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -154,6 +156,10 @@ Global
 		{A4EAE405-E0D2-49B4-8AC1-FA85210D03E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A4EAE405-E0D2-49B4-8AC1-FA85210D03E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A4EAE405-E0D2-49B4-8AC1-FA85210D03E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FCDDC526-20A9-4AA5-A740-561A5A8EC9A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCDDC526-20A9-4AA5-A740-561A5A8EC9A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCDDC526-20A9-4AA5-A740-561A5A8EC9A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCDDC526-20A9-4AA5-A740-561A5A8EC9A5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
