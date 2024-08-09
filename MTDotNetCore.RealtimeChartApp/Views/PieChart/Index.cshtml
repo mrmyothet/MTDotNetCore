@@ -1,4 +1,4 @@
-﻿
+﻿@model MTDotNetCore.RealtimeChartApp.Models.PieChartResponseModel;
 
 <figure class="highcharts-figure" id="chart-container">
     <div id="container"></div>
@@ -67,6 +67,9 @@
         function setPieChart(data) {
 
             $("#chart-container").html('<div id="container"></div>');
+
+            console.log(data);
+
             // const data = [
             //     {
             //         name: 'Water',
@@ -147,11 +150,12 @@
             setPieChart(data);
         });
 
-        connection.start().then(function () { 
-        
-        }).catch(function (err) { 
+        connection.start().then(function () {
+            console.log("Connection is started.");
+            setPieChart(@Html.Raw(JsonConvert.SerializeObject(Model.Data)));
+        }).catch(function (err) {
             return console.error(err.toString());
-        })
+        });
 
     </script>
 }

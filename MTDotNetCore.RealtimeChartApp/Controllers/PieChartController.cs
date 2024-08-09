@@ -17,9 +17,19 @@ namespace MTDotNetCore.RealtimeChartApp.Controllers
             _hubContext = hubContext;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var lst = await _db.TblPieCharts.AsNoTracking().ToListAsync();
+            var data = lst.Select(x => new PieChartDataModel
+                {
+                    name = x.PieChartName,
+                    y = x.PieChartValue
+                })
+                .ToList();
+
+            PieChartResponseModel resModel = new PieChartResponseModel { Data = data };
+
+            return View(resModel);
         }
 
         public IActionResult Create()
