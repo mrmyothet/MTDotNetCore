@@ -78,10 +78,16 @@ Database First <=
 
 Scaffold-DbContext - to create a model based on the existing database.   
 
-```console
+```bash
+
 Scaffold-DbContext "Server=MYOTHETPC\MSSQLSERVER2012;Database=DotNetTrainingBatch4;User   ID=MYOTHETPC\Administrator;Password=admin123!;TrustServerCertificate=True;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -Context ScaffoldDbContext
 Scaffold-DbContext "Name=ConnectionStrings:DotNetTrainingBatch4" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -Context AppDbContext -table Tbl_PieChart
 
+```
+
+```console
+dotnet tool install --global dotnet-ef --version 7
+dotnet ef dbcontext scaffold "Server=.;Database=DbName;User Id=userId;Password=password;TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer -o Models -c AppDbContext -t Tbl_Name -f
 ```
 
 HTTP Methods
