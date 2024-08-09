@@ -80,6 +80,8 @@ Scaffold-DbContext - to create a model based on the existing database.
 
 ```console
 Scaffold-DbContext "Server=MYOTHETPC\MSSQLSERVER2012;Database=DotNetTrainingBatch4;User   ID=MYOTHETPC\Administrator;Password=admin123!;TrustServerCertificate=True;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -Context ScaffoldDbContext
+Scaffold-DbContext "Name=ConnectionStrings:DotNetTrainingBatch4" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -Context AppDbContext -table Tbl_PieChart
+
 ```
 
 HTTP Methods
