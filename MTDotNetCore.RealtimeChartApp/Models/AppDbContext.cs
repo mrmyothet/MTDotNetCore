@@ -13,8 +13,8 @@ public partial class AppDbContext : DbContext
 
     public virtual DbSet<TblPieChart> TblPieCharts { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
-        optionsBuilder.UseSqlServer("Name=ConnectionStrings:DotNetTrainingBatch4");
+    //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+    //    optionsBuilder.UseSqlServer("Name=ConnectionStrings:DotNetTrainingBatch4");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

@@ -1,9 +1,17 @@
+using Microsoft.EntityFrameworkCore;
 using MTDotNetCore.RealtimeChartApp.Hubs;
+using MTDotNetCore.RealtimeChartApp.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<AppDbContext>(opt =>
+{
+    opt.UseSqlServer(builder.Configuration.GetConnectionString("DotNetTrainingBatch4"));
+});
+
 builder.Services.AddSignalR();
 
 var app = builder.Build();
