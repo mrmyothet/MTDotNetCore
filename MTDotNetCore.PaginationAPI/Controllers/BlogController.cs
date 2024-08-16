@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MTDotNetCore.PaginationAPI.DB;
 using MTDotNetCore.PaginationAPI.Models;
 
@@ -77,7 +78,32 @@ namespace MTDotNetCore.PaginationAPI.Controllers
         public IActionResult GetBlog(int id)
         {
             var item = _db.Blogs.FirstOrDefault(b => b.BlogId == id);
+            if (item is null)
+            {
+                return NotFound($"No data found for the blog Id: {id}");
+            }
+
             return Ok(item);
+        }
+
+        [HttpPut("{id}")]
+        [ActionName("Update")]
+        public IActionResult UpdateBlog(int id, BlogModel model)
+        {
+            var item = _db.Blogs.AsNoTracking().FirstOrDefault(b => b.BlogId == id);
+            if (item is null)
+            {
+                return NotFound($"Not Found the blog with Id: {id}");
+            }
+
+            item.BlogTitle = model.BlogTitle;
+            item.BlogAuthor = model.BlogAuthor;
+            item.BlogContent = model.BlogContent;
+
+            int result = _db.SaveChanges();
+            string message = result > 0 ? "Update Successful." : "Update Failed.";
+
+            return Ok(message);
         }
     }
 }
