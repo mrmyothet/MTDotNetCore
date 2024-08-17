@@ -40,7 +40,7 @@ namespace MTDotNetCore.MvcAppRestClient.Controllers
             string jsonString = JsonConvert.SerializeObject(model);
 
             RestRequest restRequest = new RestRequest("/api/blog", Method.Post);
-            restRequest.AddBody(jsonString);
+            restRequest.AddJsonBody(jsonString);
             await _restClient.ExecuteAsync(restRequest);
 
             return Redirect("/Blog");
@@ -64,7 +64,7 @@ namespace MTDotNetCore.MvcAppRestClient.Controllers
         public async Task<IActionResult> Update(int id, BlogModel model)
         {
             RestRequest restRequest = new RestRequest($"/api/blog/{id}", Method.Put);
-            restRequest.AddBody(model);
+            restRequest.AddJsonBody(model);
             var response = await _restClient.ExecuteAsync(restRequest);
             if (!response.IsSuccessStatusCode)
                 return Redirect("Error");
