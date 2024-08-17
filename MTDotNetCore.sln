@@ -62,7 +62,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MTDotNetCore.ConsoleAppEFCo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MTDotNetCore.ConsoleAppEFCore.Database", "MTDotNetCore.ConsoleAppEFCore.Database\MTDotNetCore.ConsoleAppEFCore.Database.csproj", "{0EF2539A-B7A7-4982-98A7-0E4F0A836C88}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MTDotNetCore.MvcApp2", "MTDotNetCore.MvcApp2\MTDotNetCore.MvcApp2.csproj", "{8B929B76-BA84-4883-8FE7-829F5A886B8B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MTDotNetCore.MvcAppHttpClient", "MTDotNetCore.MvcApp2\MTDotNetCore.MvcAppHttpClient.csproj", "{8B929B76-BA84-4883-8FE7-829F5A886B8B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
