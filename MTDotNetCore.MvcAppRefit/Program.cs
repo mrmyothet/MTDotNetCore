@@ -1,4 +1,12 @@
+using MTDotNetCore.MvcAppRefit;
+using Refit;
+
 var builder = WebApplication.CreateBuilder(args);
+
+string uriString = builder.Configuration.GetValue<string>("ApiUrl")!;
+builder
+    .Services.AddRefitClient<IBlogApi>()
+    .ConfigureHttpClient(c => c.BaseAddress = new Uri(uriString));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -20,8 +28,6 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
