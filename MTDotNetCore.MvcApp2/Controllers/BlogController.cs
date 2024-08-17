@@ -69,4 +69,17 @@ public class BlogController : Controller
 
         return View(model);
     }
+
+    [ActionName("Update")]
+    public async Task<IActionResult> Update(int id, BlogModel model)
+    {
+        string jsonString = JsonConvert.SerializeObject(model);
+        HttpContent content = new StringContent(jsonString, Encoding.UTF8, Application.Json);
+
+        var response = await _httpClient.PutAsync($"api/blog/{id}", content);
+        if (!response.IsSuccessStatusCode)
+            return RedirectToAction("Edit");
+
+        return Redirect("/Blog");
+    }
 }

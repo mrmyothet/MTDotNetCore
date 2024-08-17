@@ -90,7 +90,7 @@ namespace MTDotNetCore.PaginationAPI.Controllers
         [ActionName("Update")]
         public IActionResult UpdateBlog(int id, BlogModel model)
         {
-            var item = _db.Blogs.AsNoTracking().FirstOrDefault(b => b.BlogId == id);
+            var item = _db.Blogs.FirstOrDefault(b => b.BlogId == id);
             if (item is null)
             {
                 return NotFound($"Not Found the blog with Id: {id}");
