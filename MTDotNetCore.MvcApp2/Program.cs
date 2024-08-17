@@ -5,7 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddScoped<HttpClient>();
+//builder.Services.AddScoped<HttpClient>();
 builder.Services.AddScoped(n => new HttpClient()
 {
     BaseAddress = new Uri(builder.Configuration.GetValue<string>("ApiUrl")!)

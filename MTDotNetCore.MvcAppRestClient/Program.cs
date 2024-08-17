@@ -1,7 +1,12 @@
+using RestSharp;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+string baseUrl = builder.Configuration.GetValue<string>("ApiUrl")!;
+builder.Services.AddScoped(n => new RestClient(baseUrl));
 
 var app = builder.Build();
 
@@ -20,6 +25,6 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
+app.MapControllerRoute(name: "default", pattern: "{controller=Blog}/{action=Index}/{id?}");
 
 app.Run();
