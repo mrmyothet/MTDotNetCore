@@ -105,5 +105,24 @@ namespace MTDotNetCore.PaginationAPI.Controllers
 
             return Ok(message);
         }
+
+        [HttpDelete("{id}")]
+        [ActionName("Delete")]
+        public async Task<IActionResult> DeleteBlogAsync(int id)
+        {
+            var item = _db.Blogs.FirstOrDefault(b => b.BlogId == id);
+            if (item is null)
+            {
+                return NotFound($"Not found the blog with Id: {id}");
+            }
+
+            _db.Blogs.Remove(item);
+            int result = await _db.SaveChangesAsync();
+
+            if (result <= 0)
+                return StatusCode(StatusCodes.Status500InternalServerError, "Delete Failed.");
+
+            return Ok("Delete Successful");
+        }
     }
 }

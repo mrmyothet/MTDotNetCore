@@ -80,6 +80,17 @@ public class BlogController : Controller
         if (!response.IsSuccessStatusCode)
             return RedirectToAction("Edit");
 
-        return Redirect("/Blog");
+        return Redirect("/blog");
+    }
+
+    [ActionName("Delete")]
+    public async Task<IActionResult> Delete(int id)
+    {
+        var response = await _httpClient.DeleteAsync($"api/blog/{id}");
+
+        if (!response.IsSuccessStatusCode)
+            return Redirect("Error");
+
+        return Redirect("/blog");
     }
 }
