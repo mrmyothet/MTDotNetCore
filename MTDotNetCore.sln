@@ -70,6 +70,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MTDotNetCore.MvcAppRefit", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MTDotNetCore.MvcDesignApp", "MTDotNetCore.MvcDesignApp\MTDotNetCore.MvcDesignApp.csproj", "{60F14E59-2DDC-4684-AF50-E7ABC9B7B90A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MTDotNetCore.BlazorWasm", "MTDotNetCore.BlazorWasm\MTDotNetCore.BlazorWasm.csproj", "{7E5D2A0C-6439-4428-89F3-D816A7E68755}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -196,6 +198,10 @@ Global
 		{60F14E59-2DDC-4684-AF50-E7ABC9B7B90A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{60F14E59-2DDC-4684-AF50-E7ABC9B7B90A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{60F14E59-2DDC-4684-AF50-E7ABC9B7B90A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E5D2A0C-6439-4428-89F3-D816A7E68755}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E5D2A0C-6439-4428-89F3-D816A7E68755}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E5D2A0C-6439-4428-89F3-D816A7E68755}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E5D2A0C-6439-4428-89F3-D816A7E68755}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
