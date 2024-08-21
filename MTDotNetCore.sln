@@ -64,9 +64,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MTDotNetCore.ConsoleAppEFCo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MTDotNetCore.MvcAppHttpClient", "MTDotNetCore.MvcApp2\MTDotNetCore.MvcAppHttpClient.csproj", "{8B929B76-BA84-4883-8FE7-829F5A886B8B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MTDotNetCore.MvcAppRestClient", "MTDotNetCore.MvcAppRestClient\MTDotNetCore.MvcAppRestClient.csproj", "{495F483C-1F3A-475F-BCED-3B03497FDE1A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MTDotNetCore.MvcAppRestClient", "MTDotNetCore.MvcAppRestClient\MTDotNetCore.MvcAppRestClient.csproj", "{495F483C-1F3A-475F-BCED-3B03497FDE1A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MTDotNetCore.MvcAppRefit", "MTDotNetCore.MvcAppRefit\MTDotNetCore.MvcAppRefit.csproj", "{65FC1FF1-D084-4B7D-92EC-2A87250BB70C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MTDotNetCore.MvcAppRefit", "MTDotNetCore.MvcAppRefit\MTDotNetCore.MvcAppRefit.csproj", "{65FC1FF1-D084-4B7D-92EC-2A87250BB70C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MTDotNetCore.MvcDesignApp", "MTDotNetCore.MvcDesignApp\MTDotNetCore.MvcDesignApp.csproj", "{60F14E59-2DDC-4684-AF50-E7ABC9B7B90A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -190,6 +192,10 @@ Global
 		{65FC1FF1-D084-4B7D-92EC-2A87250BB70C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{65FC1FF1-D084-4B7D-92EC-2A87250BB70C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{65FC1FF1-D084-4B7D-92EC-2A87250BB70C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60F14E59-2DDC-4684-AF50-E7ABC9B7B90A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60F14E59-2DDC-4684-AF50-E7ABC9B7B90A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60F14E59-2DDC-4684-AF50-E7ABC9B7B90A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60F14E59-2DDC-4684-AF50-E7ABC9B7B90A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
