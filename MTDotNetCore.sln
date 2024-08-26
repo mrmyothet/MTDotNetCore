@@ -68,9 +68,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MTDotNetCore.MvcAppRestClie
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MTDotNetCore.MvcAppRefit", "MTDotNetCore.MvcAppRefit\MTDotNetCore.MvcAppRefit.csproj", "{65FC1FF1-D084-4B7D-92EC-2A87250BB70C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MTDotNetCore.MvcDesignApp", "MTDotNetCore.MvcDesignApp\MTDotNetCore.MvcDesignApp.csproj", "{60F14E59-2DDC-4684-AF50-E7ABC9B7B90A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MTDotNetCore.MvcDesignApp", "MTDotNetCore.MvcDesignApp\MTDotNetCore.MvcDesignApp.csproj", "{60F14E59-2DDC-4684-AF50-E7ABC9B7B90A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MTDotNetCore.BlazorWasm", "MTDotNetCore.BlazorWasm\MTDotNetCore.BlazorWasm.csproj", "{7E5D2A0C-6439-4428-89F3-D816A7E68755}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MTDotNetCore.BlazorWasm", "MTDotNetCore.BlazorWasm\MTDotNetCore.BlazorWasm.csproj", "{7E5D2A0C-6439-4428-89F3-D816A7E68755}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
