@@ -1,0 +1,47 @@
+﻿@page "/blog/create"
+@inject HttpClient httpClient
+@inject NavigationManager nav
+
+<PageTitle>New Blog</PageTitle>
+<h3>New Blog</h3>
+
+<form action="/Blog/Save" method="post">
+    <div class="mb-3">
+        <label class="form-label">Title</label>
+        <input type="text" class="form-control" @bind-value="_model.blogTitle">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Author</label>
+        <input type="text" class="form-control" @bind-value="_model.blogAuthor">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Content</label>
+        <textarea class="form-control" rows="3" @bind="_model.blogContent"></textarea>
+    </div>
+
+    <NavLink href="/blog" class="btn btn-dark">Back</NavLink>
+    <button type="button" class="btn btn-success" @onclick="Save">Save</button>
+</form>
+
+@code {
+    private BlogModel _model = new BlogModel();
+
+    public async Task Save()
+    {
+        string jsonStr = JsonConvert.SerializeObject(_model);
+        HttpContent content = new StringContent(jsonStr, Encoding.UTF8, Application.Json);
+        var response = await httpClient.PostAsync("/api/blog", content);
+        if (!response.IsSuccessStatusCode)
+        {
+            nav.NavigateTo("/blog/error");
+        }
+
+        string result = await response.Content.ReadAsStringAsync();
+        if (!result.ToLower().Contains("success"))
+        {
+            nav.NavigateTo("/blog/error");
+        }
+
+        nav.NavigateTo("/blog");
+    }
+}

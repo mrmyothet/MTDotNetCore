@@ -1,10 +1,11 @@
 ﻿@page "/blog"
-@using Newtonsoft.Json
+
 @inject HttpClient httpClient
 
 <PageTitle>Blog List</PageTitle>
-
 <h3>BlogList</h3>
+
+<NavLink class="btn btn-outline-success" href="/blog/create">New</NavLink>
 
 @if (_blogs is not null)
 {
@@ -53,13 +54,5 @@
         {
 
         }
-    }
-
-    public class BlogModel
-    {
-        public int blogId { get; set; }
-        public string blogTitle { get; set; }
-        public string blogAuthor { get; set; }
-        public string blogContent { get; set; }
     }
 }
