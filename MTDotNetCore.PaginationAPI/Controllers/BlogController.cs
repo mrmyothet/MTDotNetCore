@@ -25,7 +25,7 @@ namespace MTDotNetCore.PaginationAPI.Controllers
         }
 
         [HttpGet("{pageNo}/{pageSize}")]
-        [HttpGet("/pageNo/{pageNo}/pageSize/{pageSize}")]
+        [HttpGet("pageNo/{pageNo}/pageSize/{pageSize}")]
         public IActionResult GetBlogs(int pageNo, int pageSize)
         {
             int rowCount = _db.Blogs.Count();
